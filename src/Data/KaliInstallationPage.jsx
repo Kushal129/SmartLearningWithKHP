@@ -230,7 +230,7 @@ const ImageModal = ({ isOpen, onRequestClose, imageUrl }) => (
     <div className="relative bg-white p-2 rounded-md max-w-4xl mx-auto">
       <button
         onClick={onRequestClose}
-        className="absolute top-1 right-2 text-gray-900 hover:text-gray-700 text-2xl rounded-full p-2"
+        className="absolute top-1 right-2 text-white hover:text-gray-300 text-2xl rounded-full p-2"
         aria-label="Close modal"
       >
         &times;
