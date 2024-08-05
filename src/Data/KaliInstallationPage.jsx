@@ -301,7 +301,7 @@ const KaliInstallationPage = () => {
   };
 
   return (
-    <div className="p-6 inline-block bg-gradient-to-b from-[#6061b8] via-transparent to-transparent min-h-screen rounded-lg" style={{ height: '80vh' }}>
+    <div className="p-6 inline-block bg-gradient-to-b from-[#496ad7] via-transparent to-transparent min-h-screen rounded-lg" style={{ height: '80vh' }}>
       <header className="mb-6 text-center">
         <img src={logo} alt="Logo" className="w-24 mx-auto mb-4" />
         <h1 className="text-3xl md:text-4xl font-bold mb-2">{topicName}</h1>
