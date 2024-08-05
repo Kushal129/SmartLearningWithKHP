@@ -9,7 +9,7 @@ const cards = [
     title: 'Kali Linux Installation', 
     description: 'Guide to installing Kali Linux.', 
     path: '/kali-installation', 
-    icon: <FaLinux className="text-6xl text-indigo-600 mb-4" /> 
+    icon: <img src='https://cdn-icons-png.flaticon.com/512/15465/15465695.png' className='w-[50%] h-[50%]'/> 
   },
 //   { 
 //     title: 'Nmap', 

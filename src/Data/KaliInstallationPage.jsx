@@ -1,7 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaRegCopy } from 'react-icons/fa';
 import Modal from 'react-modal';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import img1 from '../../public/kalilinuxinstall/1.png';
+import img2 from '../../public/kalilinuxinstall/2.png';
+import img3 from '../../public/kalilinuxinstall/3.png';
+import img4 from '../../public/kalilinuxinstall/4.png';
+import img5 from '../../public/kalilinuxinstall/5.png';
+import img6 from '../../public/kalilinuxinstall/6.png';
+import img7 from '../../public/kalilinuxinstall/7.png';
+import img8 from '../../public/kalilinuxinstall/8.png';
+import img9 from '../../public/kalilinuxinstall/9.png';
+import img10 from '../../public/kalilinuxinstall/10.png';
+import img11 from '../../public/kalilinuxinstall/11.png';
+import img12 from '../../public/kalilinuxinstall/12.png';
+import img13 from '../../public/kalilinuxinstall/13.png';
+import img14 from '../../public/kalilinuxinstall/14.png';
+import img15 from '../../public/kalilinuxinstall/15.png';
+import img16 from '../../public/kalilinuxinstall/16.png';
+import img17 from '../../public/kalilinuxinstall/17.png';
+import img18 from '../../public/kalilinuxinstall/18.png';
+import img19 from '../../public/kalilinuxinstall/19.png';
+import img20 from '../../public/kalilinuxinstall/20.png';
+import img21 from '../../public/kalilinuxinstall/21.png';
 
 // Example dynamic data structure
 const dynamicData = {
@@ -35,27 +56,16 @@ const dynamicData = {
     },
   ],
   steps: [
-    '../../public/kalilinuxinstall/1.png',
-    '../../public/kalilinuxinstall/2.png',
-    '../../public/kalilinuxinstall/3.png',
-    '../../public/kalilinuxinstall/4.png',
-    '../../public/kalilinuxinstall/5.png',
-    '../../public/kalilinuxinstall/6.png',
-    '../../public/kalilinuxinstall/7.png',
-    '../../public/kalilinuxinstall/8.png',
-    '../../public/kalilinuxinstall/9.png',
-    '../../public/kalilinuxinstall/10.png',
-    '../../public/kalilinuxinstall/11.png',
-    '../../public/kalilinuxinstall/12.png',
-    '../../public/kalilinuxinstall/13.png',
-    '../../public/kalilinuxinstall/14.png',
-    '../../public/kalilinuxinstall/15.png',
-    '../../public/kalilinuxinstall/16.png',
-    '../../public/kalilinuxinstall/17.png',
-    '../../public/kalilinuxinstall/18.png',
-    '../../public/kalilinuxinstall/19.png',
-    '../../public/kalilinuxinstall/20.png',
-    '../../public/kalilinuxinstall/21.png',
+    img1, img2,
+    img3, img4, img5,
+    img6, img7,
+    img8, img9,
+    img10, img11,
+    img12, img13,
+    img14, img15,
+    img16, img17,
+    img18, img19,
+    img20, img21,
   ],
   videoUrl: 'https://www.youtube.com/embed/examplevideo'
 };
@@ -184,6 +194,7 @@ const basicCommands = [
 ];
 
 
+
 const BasicCommandsSection = () => (
   <section className="mb-6">
     <h2 className="text-2xl font-semibold mb-4">Basic Kali Linux Commands</h2>
@@ -216,10 +227,11 @@ const ImageModal = ({ isOpen, onRequestClose, imageUrl }) => (
     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75"
     overlayClassName="fixed inset-0"
   >
-    <div className="relative bg-white/80 p-2 rounded-md max-w-4xl mx-auto">
+    <div className="relative bg-white p-2 rounded-md max-w-4xl mx-auto">
       <button
         onClick={onRequestClose}
-        className="absolute top-1 right-2 text-white hover:text-white/80 text-2xl rounded-full p-2"
+        className="absolute top-1 right-2 text-gray-900 hover:text-gray-700 text-2xl rounded-full p-2"
+        aria-label="Close modal"
       >
         &times;
       </button>
@@ -274,6 +286,10 @@ const KaliInstallationPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
 
+  useEffect(() => {
+    Modal.setAppElement('#root'); // Set the app element for accessibility
+  }, []);
+
   const openModal = (imageUrl) => {
     setSelectedImage(imageUrl);
     setModalIsOpen(true);
@@ -301,7 +317,7 @@ const KaliInstallationPage = () => {
         <ImageGallery images={steps} onImageClick={openModal} />
       </section>
 
-
+      {/* Uncomment this section if you want to include the video guide */}
       {/* <section className="mb-6">
         <h1 className="text-3xl text-center font-bold mb-6">Video Guide</h1>
         <div className="flex justify-center">
@@ -317,7 +333,6 @@ const KaliInstallationPage = () => {
         </div>
       </section> */}
 
-
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">Code Examples</h2>
         <p className="font-semibold text-gray-700 mb-5 text-md">Open terminal and write this command.</p>
@@ -327,8 +342,7 @@ const KaliInstallationPage = () => {
       </section>
       <ImageModal isOpen={modalIsOpen} onRequestClose={closeModal} imageUrl={selectedImage} />
 
-      <BasicCommandsSection className="mb-6"></BasicCommandsSection>
-
+      <BasicCommandsSection />
     </div>
   );
 };
