@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import IndexPage from './IndexPage';
-import NmapPage from './Data/NmapPage';
+import NmapPage from './Data/Nmap/NmapPage';
 import KaliInstallationPage from './Data/KaliInstallationPage';
 import Breadcrumb from './components/Breadcrumb';
-import './App.css'
 import Footer from './components/Footer';
 import Header from './components/Header';
 import NotFoundPage from './components/NotFoundPage';
