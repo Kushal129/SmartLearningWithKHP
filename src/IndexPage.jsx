@@ -6,8 +6,8 @@ import { GiEyeTarget } from 'react-icons/gi';
 
 const cards = [
   {
-    title: 'Kali Linux Installation',
-    description: 'Guide to installing Kali Linux.',
+    title: 'Kali Linux in VMware Installation',
+    description: 'Guide to installing Kali Linux into VMware.',
     path: '/kali-installation',
     icon: <img src='https://cdn-icons-png.flaticon.com/512/15465/15465695.png' className='w-[50%] h-[50%]' />
   },
@@ -15,18 +15,18 @@ const cards = [
     title: 'Nmap',
     description: 'Learn about network scanning with Nmap.',
     path: '/nmap',
-    icon: <FaNetworkWired className="text-6xl text-teal-500 mb-4" />
+    icon: <img src='https://miro.medium.com/v2/resize:fit:351/0*P4UVvCNl7EX4Xfgn.png' className='w-[50%] h-[50%]'/>
   },
 ];
 
-const deftcards = [
-  {
-    title: 'Under Development Nmap',
-    description: 'This section is under development.',
-    path: '/',
-    icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
-  },
-];
+// const deftcards = [
+//   {
+//     title: 'Under Development Nmap',
+//     description: 'This section is under development.',
+//     path: '/',
+//     icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
+//   },
+// ];
 
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -86,7 +86,7 @@ const IndexPage = () => {
             </p>
           )}
 
-          {deftcards.map((card, index) => (
+          {/* {deftcards.map((card, index) => (
             <animated.div
               key={index}
               style={springProps}
@@ -100,7 +100,7 @@ const IndexPage = () => {
                 <p className="text-gray-600">{card.description}</p>
               </Link>
             </animated.div>
-          ))}
+          ))} */}
         </div>
       </main>
     </div>

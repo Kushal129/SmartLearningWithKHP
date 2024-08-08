@@ -69,6 +69,7 @@ const mainCategories = [
             // }
         ]
     },
+    
 
     // {
     //     title: 'Scanning Techniques',
@@ -505,6 +506,24 @@ const mainCategories = [
     //         }
     //     ]
     // }
+
+
+
+
+    {
+        title: 'Other Topic Under Development..... :)',
+        subcategories: [
+            {
+                title: [],
+                description: [],
+                codeExamples: [],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            }
+        ]
+    }
 ];
 
 export default mainCategories;
