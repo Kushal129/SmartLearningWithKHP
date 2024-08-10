@@ -16,6 +16,13 @@ const cards = [
     path: '/nmap',
     icon: <img src='https://miro.medium.com/v2/resize:fit:351/0*P4UVvCNl7EX4Xfgn.png' className='w-[50%] h-[50%]'/>
   },
+  {
+    title: 'All Port List',
+    description: 'All Port List',
+    path: '/AllPortsList',
+    icon: <img src='https://cdn.worldvectorlogo.com/logos/open-port-security-project.svg' className='w-[50%] h-[50%]' />
+  }, 
+  
 ];
 
 // const deftcards = [
