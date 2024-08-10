@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import { Link } from 'react-router-dom';
-import { FaNetworkWired, FaRegWindowClose, FaSearch } from 'react-icons/fa';
-import { GiEyeTarget } from 'react-icons/gi';
+import { FaRegWindowClose, FaSearch } from 'react-icons/fa';
 
 const cards = [
   {

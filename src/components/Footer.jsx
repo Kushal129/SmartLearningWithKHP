@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* About Section */}
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <a className="text-2xl font-bold text-white hover:text-purple-300 cursor-pointer mb-3" href='/about'>Discover SmartLearning with KPH</a>
+            <Link to="/about" className="text-2xl font-bold text-white hover:text-purple-300 cursor-pointer mb-3">Discover SmartLearning with KPH</Link>
             <p className="text-gray-600 mt-2">
               Unlock your potential with our expert-guided tutorials on network scanning, cybersecurity, and beyond.
             </p>

@@ -58,15 +58,16 @@ const mainCategories = [
                 images: ['https://media.fs.com/images/community/upload/kindEditor/202107/29/original-seven-layers-of-osi-model-1627523878-JYjV8oybcC.png'],
                 links: []
             },                      
-            // {
-            //     title: 'Analyzing Network Layer Using Wireshark',
-            //     description: 'Learn how to use Wireshark to analyze and troubleshoot network layer traffic.',
-            //     codeExamples: [],
-            //     additionalPointstitle : [],
-            //     additionalPoints: [],
-            //     images: [],
-            //     links: []
-            // }
+            {
+                title: 'Analyzing Network Layer Using Wireshark',
+                // description: 'Learn how to use Wireshark to analyze and troubleshoot network layer traffic.',
+                description: 'We can also analyze troubleshoot network layer traffic using Wireshark.',
+                codeExamples: [],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            }
         ]
     },
     
@@ -75,7 +76,7 @@ const mainCategories = [
     //     title: 'Scanning Techniques',
     //     subcategories: [
     //         {
-    //             title: 'Scanning TCP and UDP Ports',
+    //             title: 'Scanning TCP ( depsrtmetn of defence banavu che ) and UDP Ports',
     //             description: 'Techniques for scanning both TCP and UDP ports to discover services and vulnerabilities.',
     //             codeExamples: [],
     //             additionalPointstitle : [],
@@ -506,7 +507,6 @@ const mainCategories = [
     //         }
     //     ]
     // }
-
 
 
 
