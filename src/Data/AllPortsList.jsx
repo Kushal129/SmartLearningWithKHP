@@ -3,7 +3,8 @@ import { FaSearch, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 
 const ports = [
-  // Categorized Ports Data (same as before)
+  { number: 1, category: 'Networking', service: 'ICMP Echo Reply', description: '<span class="font-bold">ICMP Echo Reply</span> is used to respond to ICMP Echo Requests, typically used for testing network connectivity (ping).' },
+  { number: 7, category: 'Networking', service: 'ICMP Echo Request', description: '<span class="font-bold">ICMP Echo Request</span> is used to request a response from a remote host, commonly used for testing network connectivity (ping).' },
   { number: 20, category: 'Networking', service: 'FTP Data Transfer', description: 'Used for <span class="font-bold">File Transfer Protocol (FTP)</span> data transfer. FTP control commands are handled on port 21.' },
   { number: 21, category: 'Networking', service: 'FTP Control', description: 'Handles <span class="font-bold">FTP control commands</span> used to manage file transfers over the network.' },
   { number: 22, category: 'Networking', service: 'SSH', description: 'Used for <span class="font-bold">Secure Shell (SSH)</span> access, providing encrypted communication for secure remote login and data transfer.' },
@@ -24,8 +25,6 @@ const ports = [
   { number: 6379, category: 'Database', service: 'Redis', description: '<span class="font-bold">Redis</span> database connections use this port for interacting with Redis, an in-memory data structure store often used for caching.' },
   { number: 8080, category: 'Web', service: 'HTTP Alternate', description: '<span class="font-bold">HTTP Alternate</span> is often used as an alternative port for HTTP traffic, commonly employed for web servers running on non-standard ports.' },
   { number: 8443, category: 'Web', service: 'HTTPS Alternate', description: '<span class="font-bold">HTTPS Alternate</span> is used as an alternative port for HTTPS traffic, similar to port 443 but for different use cases or configurations.' },
-
-  // Additional Ports
   { number: 1521, category: 'Database', service: 'Oracle DB', description: '<span class="font-bold">Oracle Database</span> uses this port for client-server communication.' },
   { number: 27017, category: 'Database', service: 'MongoDB', description: '<span class="font-bold">MongoDB</span> uses this port for database communication.' },
   { number: 5000, category: 'Networking', service: 'UPnP', description: '<span class="font-bold">Universal Plug and Play (UPnP)</span> is used for network device discovery and management.' },
@@ -37,8 +36,11 @@ const ITEMS_PER_PAGE = 10;
 
 const highlightText = (text, searchTerm) => {
   if (!searchTerm) return text;
-  const regex = new RegExp(`(${searchTerm})`, 'gi');
-  return text.replace(regex, '<span class="bg-yellow-300">$1</span>');
+  
+  const escapedSearchTerm = searchTerm.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const regex = new RegExp(`(${escapedSearchTerm})`, 'gi');
+  
+  return text.replace(regex, '<span class="bg-purple-300 text-white">$1</span>');
 };
 
 const AllPortsSection = () => {
@@ -46,6 +48,7 @@ const AllPortsSection = () => {
   const [openCategories, setOpenCategories] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [sortOrder, setSortOrder] = useState({ field: 'number', direction: 'asc' });
+  const [currentCategory, setCurrentCategory] = useState(null);
 
   const sortPorts = (ports, field, direction) => {
     return [...ports].sort((a, b) => {
@@ -63,9 +66,10 @@ const AllPortsSection = () => {
   };
 
   const filteredPorts = ports.filter(port =>
-    port.number.toString().includes(searchTerm)
+    port.number.toString().includes(searchTerm) || 
+    port.service.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  
   const groupedPorts = filteredPorts.reduce((acc, port) => {
     (acc[port.category] = acc[port.category] || []).push(port);
     return acc;
@@ -76,18 +80,16 @@ const AllPortsSection = () => {
       ...prev,
       [category]: !prev[category]
     }));
+    setCurrentCategory(prevCategory => prevCategory === category ? null : category);
   };
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
 
-  const paginatedPorts = Object.fromEntries(
-    Object.entries(groupedPorts).map(([category, ports]) => [
-      category,
-      sortPorts(ports, sortOrder.field, sortOrder.direction).slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE)
-    ])
-  );
+  const paginatedPorts = currentCategory ? 
+    sortPorts(groupedPorts[currentCategory] || [], sortOrder.field, sortOrder.direction).slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE) 
+    : [];
 
   return (
     <section className="mb-6">
@@ -110,7 +112,7 @@ const AllPortsSection = () => {
             </div>
           </div>
           <div className="p-4">
-            {Object.keys(paginatedPorts).map((category, index) => (
+            {Object.keys(groupedPorts).map((category, index) => (
               <div key={index} className="mb-6">
                 <div className="flex items-center justify-between cursor-pointer" onClick={() => toggleCategory(category)}>
                   <h4 className="text-xl font-semibold mb-2">{category}</h4>
@@ -133,32 +135,33 @@ const AllPortsSection = () => {
                         </tr>
                       </thead>
                       <tbody className="text-gray-700">
-                        {paginatedPorts[category].map((port, index) => (
+                        {paginatedPorts.map((port, index) => (
                           <tr key={index} className="border-b hover:bg-gray-50">
-                            <td className="px-4 py-2">{port.number}</td>
-                            <td className="px-4 py-2">{port.service}</td>
-                            <td className="px-4 py-2" dangerouslySetInnerHTML={{ __html: highlightText(port.description, searchTerm) }} />
+                            <td className="px-4 py-2" dangerouslySetInnerHTML={{ __html: highlightText(port.number.toString(), searchTerm) }} />
+                            <td className="px-4 py-2" dangerouslySetInnerHTML={{ __html: highlightText(port.service, searchTerm)}}/>
+                            <td className="px-4 py-2" dangerouslySetInnerHTML={{ __html: highlightText(port.description) }} />
                           </tr>
                         ))}
                       </tbody>
                     </table>
-                    <div className="mt-4 flex justify-center">
-                      <ReactPaginate
-                        pageCount={Math.ceil(filteredPorts.length / ITEMS_PER_PAGE)}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
-                        onPageChange={handlePageChange}
-                        containerClassName="pagination flex space-x-2"
-                        pageClassName="page-item"
-                        pageLinkClassName="page-link py-1 px-3 rounded-lg border border-gray-300 bg-white text-gray-700"
-                        activeClassName="active"
-                        activeLinkClassName="bg-purple-600 text-white"
-                        previousClassName="page-item"
-                        nextClassName="page-item"
-                        previousLinkClassName="page-link py-1 px-3 rounded-lg border border-gray-300 bg-white text-gray-700"
-                        nextLinkClassName="page-link py-1 px-3 rounded-lg border border-gray-300 bg-white text-gray-700"
-                      />
-                    </div>
+                    {currentCategory && (
+                      <div className="mt-4 flex justify-center">
+                        <ReactPaginate
+                          pageCount={Math.ceil(groupedPorts[currentCategory].length / ITEMS_PER_PAGE)}
+                          pageRangeDisplayed={5}
+                          marginPagesDisplayed={2}
+                          onPageChange={handlePageChange}
+                          containerClassName="flex space-x-2"
+                          pageClassName="page-item"
+                          pageLinkClassName="py-1 px-3 rounded-lg border border-gray-300 text-gray-700"
+                          activeClassName="text-white"
+                          previousClassName="page-item"
+                          nextClassName="page-item"
+                          previousLinkClassName="py-1 px-3 rounded-lg border border-gray-300 text-gray-700"
+                          nextLinkClassName="py-1 px-3 rounded-lg border border-gray-300 text-gray-700"
+                        />
+                      </div>
+                    )}
                   </>
                 )}
               </div>

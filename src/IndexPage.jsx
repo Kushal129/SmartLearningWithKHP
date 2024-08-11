@@ -18,9 +18,9 @@ const cards = [
   },
   {
     title: 'All Port List',
-    description: 'All Port List',
+    description: 'All Networks Port List',
     path: '/AllPortsList',
-    icon: <img src='https://cdn.worldvectorlogo.com/logos/open-port-security-project.svg' className='w-[50%] h-[50%]' />
+    icon: <img src='https://ipvm-uploads.s3.amazonaws.com/uploads/a4ca/a530/ethernet.png' className='w-[50%] h-[50%]' />
   }, 
   
 ];
