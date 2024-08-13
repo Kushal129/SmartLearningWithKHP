@@ -77,7 +77,7 @@ const Header = () => {
                 <LiaSearchengin className="mr-1 text-2xl" />
                 <span>Smart Search ?</span>
               </div>
-              <Tooltip text='<p>Smart Search <a href="https://ewasion.github.io/opendirectory-finder/" class="text-purple-600 hover:underline" target="_blank" rel="noopener noreferrer">Click</a> is a tool for finding open directories. Source: <a href="https://github.com/ewasion/opendirectory-finder/tree/master" class="text-purple-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>' />
+              <Tooltip text='<p>Smart Search <a href="https://ewasion.github.io/opendirectory-finder/" class="text-purple-600 hover:underline" target="_blank" rel="noopener noreferrer">Click</a> is a tool for finding open directories. Source from: <a href="https://github.com/ewasion/opendirectory-finder/tree/master" class="text-purple-500 hover:underline" target="_blank" rel="noopener noreferrer">GitHub Repository</a></p>' />
             </div>
             <Link to="/" className="flex items-center text-purple-900 hover:text-gray-700 mb-4" onClick={toggleMenu}>
               <FaHome className="mr-1" />
