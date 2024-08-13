@@ -72,65 +72,93 @@ const mainCategories = [
     },
     
 
-    // {
-    //     title: 'Scanning Techniques',
-    //     subcategories: [
-    //         {
-    //             title: 'Scanning TCP ( depsrtmetn of defence banavu che ) and UDP Ports',
-    //             description: 'Techniques for scanning both TCP and UDP ports to discover services and vulnerabilities.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Top Headers',
-    //             description: 'Identification and analysis of common network headers.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Complete 3 Way Handshake',
-    //             description: 'Understanding and analyzing the TCP three-way handshake process.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Network Discovery',
-    //             description: 'Methods for discovering devices and services on a network.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap SYN, ACK, UDP, ARP Scan (Bypass Firewall)',
-    //             description: 'Advanced scanning techniques using SYN, ACK, UDP, and ARP to bypass firewalls and other network defenses.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap ICMP Timestamp, Traceroute, DNS Resolution',
-    //             description: 'Using Nmap for ICMP timestamp requests, traceroute, and DNS resolution to gather network information.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         }
-    //     ]
-    // },
+    {
+        title: 'Scanning Techniques',
+        subcategories: [
+            {
+                title: 'Scanning TCP and UDP Ports',
+                description: 'Techniques for scanning both TCP and UDP ports to discover services and vulnerabilities. TCP implementation or related the <span class="font-semibold"> Department of Defense </span> organization. ',
+                codeExamples: [
+                    {
+                        code: 'nmap 192.168.1.1',
+                        description: 'We execute this it bydefault scanning TCP. also we have separate command <span class="font-semibold">nmap -sT 192.168.1.1 </span>'
+                    },
+                    {
+                        code: 'nmap -sU 192.168.1.1',
+                        description: 'We execute this it scanning UDP.'
+                    },
+                    {
+                        code: 'nmap -sU -sT -p- 192.168.1.1',
+                        description: 'We execute this it scanning UDP and TCP both at a time on all ports its time cunsuimg. <span class="text-red-400">Note: In real word if you can run this the Firewall will blocked you because its time cunsuimg scanning and its all ports scan.</span>'
+                    }
+                ],
+                additionalPointstitle : [],
+                additionalPoints: ['If you whant show results use wiershark'],
+                images: [],
+                links: []
+            },
+
+            {
+                title: 'Top Headers',
+                description: 'Identification and analysis of common network headers.',
+                codeExamples: [],
+                additionalPointstitle : [],
+                additionalPoints: [
+                    'SYN (Synchronize): This is like sending a request to start a conversation. When one computer wants to connect with another, it sends a SYN packet to initiate the connection. If the other computer agrees, it responds with a SYN/ACK packet to confirm.',
+                    'URG (Urgent): This flag tells the receiving computer to prioritize certain data as urgent. If a packet has the URG flag set, it means the data should be processed immediately, even if there are other data packets waiting.',
+                    'ACK (Acknowledgement): This is a confirmation signal. When a computer receives data, it sends back an ACK packet to let the sender know that the data has been received successfully.',
+                    'PSH (Push): The PSH flag indicates that data should be sent to the receiving application right away. It’s like telling the computer to deliver the data immediately, rather than holding onto it for a while.',
+                    'FIN (Finish): When a computer wants to end a connection, it sends a FIN packet. This tells the other computer that it’s done with the conversation and wants to close the connection. If you see a packet with both SYN and FIN flags, it’s unusual and might indicate an attempt to attack.',
+                    'RST (Reset): This flag is used to reset or abort a connection. It often happens when a packet is sent to a closed port, signaling that the connection should be terminated. It can also be used to close a connection if something goes wrong.',
+                ],
+                images: [],
+                links: []
+            },
+            // {
+            //     title: 'Complete 3 Way Handshake',
+            //     description: 'Understanding and analyzing the TCP three-way handshake process.',
+            //     codeExamples: [],
+            //     additionalPointstitle : [],
+            //     additionalPoints: [],
+            //     images: [],
+            //     links: []
+            // },
+            // {
+            //     title: 'Network Discovery',
+            //     description: 'Methods for discovering devices and services on a network.',
+            //     codeExamples: [],
+            //     additionalPointstitle : [],
+            //     additionalPoints: [],
+            //     images: [],
+            //     links: []
+            // },
+            // {
+            //     title: 'Nmap SYN, ACK, UDP, ARP Scan (Bypass Firewall)',
+            //     description: 'Advanced scanning techniques using SYN, ACK, UDP, and ARP to bypass firewalls and other network defenses.',
+            //     codeExamples: [],
+            //     additionalPointstitle : [],
+            //     additionalPoints: [],
+            //     images: [],
+            //     links: []
+            // },
+            // {
+            //     title: 'Nmap ICMP Timestamp, Traceroute, DNS Resolution',
+            //     description: 'Using Nmap for ICMP timestamp requests, traceroute, and DNS resolution to gather network information.',
+            //     codeExamples: [],
+            //     additionalPointstitle : [],
+            //     additionalPoints: [],
+            //     images: [],
+            //     links: []
+            // }
+        ]
+    },
+
+
+
+
+
+
+
     // {
     //     title: 'Advanced Nmap Usage',
     //     subcategories: [
