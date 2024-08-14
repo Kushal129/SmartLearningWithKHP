@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// Modal component
+const Modal = ({ isOpen, imageSrc, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white p-4 rounded-lg shadow-md relative max-w-full max-h-full overflow-auto">
+        <button 
+          onClick={onClose}
+          className="absolute top-0 right-2 text-2xl font-bold text-black hover:text-gray-700"
+        >
+          &times;
+        </button>
+        <img 
+          src={imageSrc} 
+          alt="Popup" 
+          className="max-w-full max-h-[80vh] object-contain"
+        />
+      </div>
+    </div>
+  );
+};
 
 const SubcategoryDetail = ({ title, description, additionalPoints = [], additionalPointstitle = '', codeExamples = [], images = [], links = [] }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage('');
+  };
 
   return (
     <div className="p-4 mt-4 border border-gray-200 rounded-lg shadow-md bg-white">
       <h3 className="text-xl font-bold mb-3 text-center">{title}</h3>
-      <div
-        className="mb-4 text-gray-700"
-        dangerouslySetInnerHTML={{ __html: description }}
-      />
+      <div className="mb-4 text-gray-700" dangerouslySetInnerHTML={{ __html: description }} />
 
       {additionalPoints.length > 0 && (
         <div className="mb-4">
@@ -40,7 +72,13 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
           <h4 className="text-lg font-semibold mb-2">Images</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {images.map((src, index) => (
-              <img key={index} src={src} alt={`Image ${index + 1}`} className="w-full h-auto rounded-lg shadow-md" />
+              <img
+                key={index}
+                src={src}
+                alt={`Image ${index + 1}`}
+                className="w-full h-auto rounded-lg shadow-md cursor-pointer"
+                onClick={() => openModal(src)}
+              />
             ))}
           </div>
         </div>
@@ -49,7 +87,7 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
       {links.length > 0 && (
         <div>
           <h4 className="text-lg font-semibold mb-2">Links</h4>
-          <ul className="list-disc list-inside ml-5 text-blue-600">
+          <ul className="list-disc list-inside ml-5 text-black underline">
             {links.map((link, index) => (
               <li key={index}>
                 <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">{link}</a>
@@ -58,6 +96,8 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
           </ul>
         </div>
       )}
+
+      <Modal isOpen={isModalOpen} imageSrc={selectedImage} onClose={closeModal} />
     </div>
   );
 };

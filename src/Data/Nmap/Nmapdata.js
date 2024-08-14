@@ -104,19 +104,249 @@ const mainCategories = [
                 codeExamples: [],
                 additionalPointstitle : [],
                 additionalPoints: [
-                    'SYN (Synchronize): This is like sending a request to start a conversation. When one computer wants to connect with another, it sends a SYN packet to initiate the connection. If the other computer agrees, it responds with a SYN/ACK packet to confirm.',
-                    'URG (Urgent): This flag tells the receiving computer to prioritize certain data as urgent. If a packet has the URG flag set, it means the data should be processed immediately, even if there are other data packets waiting.',
-                    'ACK (Acknowledgement): This is a confirmation signal. When a computer receives data, it sends back an ACK packet to let the sender know that the data has been received successfully.',
-                    'PSH (Push): The PSH flag indicates that data should be sent to the receiving application right away. It’s like telling the computer to deliver the data immediately, rather than holding onto it for a while.',
-                    'FIN (Finish): When a computer wants to end a connection, it sends a FIN packet. This tells the other computer that it’s done with the conversation and wants to close the connection. If you see a packet with both SYN and FIN flags, it’s unusual and might indicate an attempt to attack.',
-                    'RST (Reset): This flag is used to reset or abort a connection. It often happens when a packet is sent to a closed port, signaling that the connection should be terminated. It can also be used to close a connection if something goes wrong.',
+                    '<span class="font-semibold">SYN (Synchronize):</span> This is like sending a request to start a conversation. When one computer wants to connect with another, it sends a SYN packet to initiate the connection. If the other computer agrees, it responds with a SYN/ACK packet to confirm.',
+                    '<span class="font-semibold">URG (Urgent):</span> This flag tells the receiving computer to prioritize certain data as urgent. If a packet has the URG flag set, it means the data should be processed immediately, even if there are other data packets waiting.',
+                    '<span class="font-semibold">ACK (Acknowledgement):</span> This is a confirmation signal. When a computer receives data, it sends back an ACK packet to let the sender know that the data has been received successfully.',
+                    '<span class="font-semibold">PSH (Push):</span> The PSH flag indicates that data should be sent to the receiving application right away. It’s like telling the computer to deliver the data immediately, rather than holding onto it for a while.',
+                    '<span class="font-semibold">FIN (Finish):</span> When a computer wants to end a connection, it sends a FIN packet. This tells the other computer that it’s done with the conversation and wants to close the connection. If you see a packet with both SYN and FIN flags, it’s unusual and might indicate an attempt to attack.',
+                    '<span class="font-semibold">RST (Reset):</span> This flag is used to reset or abort a connection. It often happens when a packet is sent to a closed port, signaling that the connection should be terminated. It can also be used to close a connection if something goes wrong.',
                 ],
+                images: ['../../../public/nmap/topheaders.svg'],
+                links: []
+            },
+            {
+                title: 'Complete 3 Way Handshake',
+                description: `Three-way handshaking is a method used to establish a connection between two computers over a network.
+                              This process ensures that both computers are ready to communicate and have agreed on the connection details before they start exchanging data. (You can Practice in Wireshark)`,
+                codeExamples: [],
+                additionalPointstitle : ['Here’s a simple explanation.'],
+                additionalPoints: [`
+                    <span class="font-semibold">STEP 1: A CONNECTION BETWEEN SERVER AND CLIENT IS ESTABLISHED - </span>First, a connection between server and client is established, so the target server must have open ports that can accept and initiate new connections. The client node sends a SYN (Synchronize Sequence Number) data packet over an IP network to a server on the same or an external network.
+                                                        This SYN packet is a random sequence number that the client wants to use for the communication (for example, X). The objective of this packet is to ask/infer if the server is open for new connections..`,
+                    `<span class="font-semibold">STEP 2: THE SERVER RECEIVES THE SYN PACKET FROM THE CLIENT NODE - </span> When the server receives the SYN packet from the client node, it responds and returns a confirmation receipt the ACK (Acknowledgement Sequence Number) packet or SYN/ACK packet. This packet includes two sequence numbers.
+                                                        The first one is ACK one, which is set by the server to one more than the sequence number it received from the client (e.g. X+1).
+                                                        The second one is the SYN sent by the server, which is another random sequence number (for example, Y).
+                                                        This sequence indicates that the server correctly acknowledged the client's packet, and that is sending its own to be acknowledged as well..`,
+                    `<span class="font-semibold">STEP 3: CLIENT NODE RECEIVES THE SYN/ACK FROM THE SERVER AND RESPONDS WITH AN ACK PACKET - </span>After the client receives the SYN/ACK from the server, it sends back an ACK packet with an incremented sequence number (Y+1). This process ensures both sides acknowledge each other’s sequence numbers. Once this exchange is complete, the connection is established, allowing for stable communication. This setup helps detect any missing or out-of-order segments before data transfer begins.`],
+                images: ['../../../public/nmap/3wayhdsk.jpg'],
+                links: []
+            },
+            {
+                title: 'Network Discovery',
+                description: 'Methods for discovering devices and services on a network.',
+                codeExamples: [
+                    {
+                        code: 'nmap -sn 192.168.1.1',
+                        description: 'This command is not scan ports its show Host is Up or Down. we also say it is a ping scanning'
+                    },
+                    {
+                        code: 'sudo netdiscover -i (Your interface ex. eth0 or wlan0)',
+                        description: 'This command is used to discover devices on a network by sending ARP requests and listening for responses. It helps identify active hosts and their IP addresses on the specified network interface (e.g., eth0 or wlan0).'
+                    },
+                    {
+                        code: 'nmap -sn 192.168.1.1-255 --exclude 192.168.1.169',
+                        description: 'This command performs a ping scan (`-sn`) to identify live hosts within the IP range 192.168.1.1 to 192.168.1.255, while excluding (avoid) the host with IP address 192.168.1.169 from the scan. It helps quickly determine which devices are active on the specified network range.'
+                    },
+                    {
+                        code: 'nmap -sn -iL <filename>',
+                        description: 'This command performs a ping scan (`-sn`) on a list of IP addresses or hostnames specified in a file (IPList.txt). It helps to identify which hosts in the provided list are online without performing a port scan.'
+                    },
+                    {
+                        code: 'nmap -sn 192.168.1.1-255 --excludefile <filename>',
+                        description: 'This command performs a ping scan (`-sn`) on the IP range 192.168.1.1 to 192.168.1.255, excluding hosts listed in (` NotScanIP.txt `). Its avoid files. IP address.'
+                    },
+
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            },
+
+
+            {
+                title: 'Nmap SYN, ACK, UDP, ARP Scan | -PS/PA/PU (Bypass Firewall)',
+                description: 'Advanced scanning techniques using SYN, ACK, UDP, and ARP to bypass firewalls and other network defenses.Sometime you Try to ping any server.You wont get any kind of response form it Because might be due to firewall or something.Mostly its block your ICMP Pecket. that time we Perform these commands. ',
+                codeExamples: [
+                    {
+                        code: 'nmap -Pn 192.168.1.1 192.168.1.22',
+                        description: `This command is doesn't perform three way handshaking. You can still catch how many ports are open. this is the most used command in namp.`
+                    },
+                    {
+                        code:'nmap -sn -A 192.168.1.1',
+                        description:'This command is used when Your (`-sn`) firewall detect and not give result. that time Use these command it will send a RST packet.'
+                    },
+                    {
+                        code:'nmap -sn -PR 192.168.1.2',
+                        description:`This command is use for send ARP ping scan. and its also show MAC address. <span class="text-red-500">Note: its only work when you in Local network or you can inside of Target network.</span>`
+                    },
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            },
+            {
+                title: 'Nmap ICMP Timestamp, Traceroute, DNS Resolution | -PE/PP/PM ',
+                description: 'Using Nmap for ICMP timestamp requests, traceroute, and DNS resolution to gather network information.',
+                codeExamples: [
+                    {
+                        code: 'nmap -PE 192.168.1.1',
+                        description: 'Sends ICMP echo request packets to the target to check if it is up. Can be used to measure round-trip time (RTT). <span class="text-red-500">Note: May bypass firewalls if the server is not properly configured.</span>'
+                    },
+                    {
+                        code: 'nmap -PP 192.168.1.1',
+                        description: 'Performs a ping scan using ICMP Timestamp Request packets to check if the host is up.'
+                    },
+                    {
+                        code: 'nmap -PM 192.168.1.1',
+                        description: 'Uses ICMP Port Unreachable packets to check if the target host is responsive.'
+                    },
+                    {
+                        code:'sudo nmap -sn nmap.scanme.org --traceroute',
+                        description:'Performs a ping scan (`-sn`) on the domain `nmap.scanme.org` and includes a traceroute to display the network path taken to reach the target.'
+                    },
+                    {
+                        code:'nmap -R 192.168.1.1',
+                        description:'Performs a reverse DNS lookup (`-R`) on the IP address 192.168.1.1 to find the hostname associated with it.'
+                    }
+                    
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            }
+        ]
+    },
+
+    {
+        title: 'Advanced Nmap Usage',
+        subcategories: [
+            {
+                title: 'Nmap Scanning Linux-Based Machines',
+                description: 'Techniques and tips for scanning Linux-based systems with Nmap.',
+                codeExamples: [],
+                additionalPointstitle : ['Set Metasploitable Into VMware'],
+                additionalPoints: [
+                    'First You can goto the Locations where you download. then go view and Enable file name extension.',
+                    'Then Double click to the <span class="text-yellow-600">Metasploitable.vmx</span> file'
+                ],
+                images: [],
+                links: ['https://sourceforge.net/projects/metasploitable/files/latest/download']
+            },
+            {
+                title: 'Nmap Port Specification and Scan Order',
+                description: 'How to specify ports and control scan order in Nmap.',
+                codeExamples: [
+                    {
+                        code: 'nmap -p 1-200 192.168.1.1',
+                        description: 'Scans ports 1 through 200 on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'nmap -p 22,88,8080,135 192.168.1.1',
+                        description: 'Scans specific ports 22, 88, 8080, and 135 on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap -sU -p 53,67,69,123,161 192.168.1.1',
+                        description: 'Performs a UDP scan on ports 53, 67, 69, 123, and 161 on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo -F 192.168.1.1',
+                        description: 'Performs a scan on the top 100 most commonly used ports on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap -F --exclude-ports 80,111,139 192.168.1.1',
+                        description: 'Performs a fast scan of the most common ports, excluding ports 80, 111, and 139 on the target IP address 192.168.1.1.'
+                    }
+
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            },
+            {
+                title: 'Nmap Scan Techniques (-sS, -ST, -SA, -SW, -SM)',
+                description: 'Explanation of different Nmap scan techniques including SYN scan, TCP connect scan, and others.',
+                codeExamples: [
+                    {
+                        code: 'nmap -sS -p 80 192.168.1.1',
+                        description: 'Performs a SYN scan on port 80. It doesn\'t complete the TCP handshake, which can help avoid triggering some firewalls.'
+                    },
+                    {
+                        code: 'nmap -sT -p 21 192.168.1.1',
+                        description: 'Performs a TCP connect scan on port 21, completing the full TCP handshake.'
+                    },
+                    {
+                        code: 'nmap -sA -p 21 192.168.1.1',
+                        description: 'Performs a TCP ACK scan on port 21 to determine if the port is filtered or unfiltered.'
+                    },
+                    {
+                        code: 'nmap -sW -p 21 192.168.1.1',
+                        description: 'Performs a TCP window scan on port 21 to infer the presence of firewalls and packet filtering.'
+                    },
+                    {
+                        code: 'nmap -sM -p 21 192.168.1.1',
+                        description: 'Performs a TCP Maimon scan on port 21, which sends SYN, ACK, and FIN flags to probe the target.'
+                    },
+                    {
+                        code: 'nmap -sX -p 21 192.168.1.1',
+                        description: 'Performs a TCP Xmas tree scan on port 21 by sending packets with FIN, PSH, and URG flags set.'
+                    }
+                    
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
+                images: [],
+                links: []
+            },
+            {
+                title: 'Nmap OS and Service Detection, Aggressive Scan, UDP',
+                description: 'Methods for detecting operating systems, services, and using aggressive scan options in Nmap.',
+                codeExamples: [
+                    {
+                        code: 'nmap -O 192.168.1.1',
+                        description: 'Detects the operating system of the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap --osscan-guess 192.168.1.1',
+                        description: 'Attempts to guess the operating system of the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap --osscan-limit 192.168.1.1',
+                        description: 'Performs an OS detection scan on the target IP address 192.168.1.1, limited to common operating systems.'
+                    },
+                    {
+                        code: 'nmap -sV 192.168.1.1',
+                        description: 'Detects and displays the versions of services running on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap -sS -sV 192.168.1.1',
+                        description: 'Performs a SYN scan to identify open ports and service versions on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap -sS -sC -sV -o 192.168.1.1',
+                        description: 'Performs a SYN scan with default scripts and service version detection on the target IP address 192.168.1.1.'
+                    },
+                    {
+                        code: 'sudo nmap -sS -A 192.168.1.1',
+                        description: '<span class="text-red-500">Note: This scan is very noisy and can generate a lot of traffic. Use with caution.</span>'
+                    },
+                    {
+                        code: 'sudo nmap -sU -p 137 192.168.1.1',
+                        description: 'Performs a UDP scan on port 137 to check for Windows NetBIOS services on the target IP address 192.168.1.1.'
+                    }
+                    
+                ],
+                additionalPointstitle : [],
+                additionalPoints: [],
                 images: [],
                 links: []
             },
             // {
-            //     title: 'Complete 3 Way Handshake',
-            //     description: 'Understanding and analyzing the TCP three-way handshake process.',
+            //     title: 'Range Scan, Results Diagnosis',
+            //     description: 'How to perform range scans and analyze scan results effectively.',
             //     codeExamples: [],
             //     additionalPointstitle : [],
             //     additionalPoints: [],
@@ -124,26 +354,8 @@ const mainCategories = [
             //     links: []
             // },
             // {
-            //     title: 'Network Discovery',
-            //     description: 'Methods for discovering devices and services on a network.',
-            //     codeExamples: [],
-            //     additionalPointstitle : [],
-            //     additionalPoints: [],
-            //     images: [],
-            //     links: []
-            // },
-            // {
-            //     title: 'Nmap SYN, ACK, UDP, ARP Scan (Bypass Firewall)',
-            //     description: 'Advanced scanning techniques using SYN, ACK, UDP, and ARP to bypass firewalls and other network defenses.',
-            //     codeExamples: [],
-            //     additionalPointstitle : [],
-            //     additionalPoints: [],
-            //     images: [],
-            //     links: []
-            // },
-            // {
-            //     title: 'Nmap ICMP Timestamp, Traceroute, DNS Resolution',
-            //     description: 'Using Nmap for ICMP timestamp requests, traceroute, and DNS resolution to gather network information.',
+            //     title: 'Nmap Output and Verbosity',
+            //     description: 'Understanding and customizing Nmap output and verbosity levels.',
             //     codeExamples: [],
             //     additionalPointstitle : [],
             //     additionalPoints: [],
@@ -159,65 +371,6 @@ const mainCategories = [
 
 
 
-    // {
-    //     title: 'Advanced Nmap Usage',
-    //     subcategories: [
-    //         {
-    //             title: 'Nmap Scanning Linux-Based Machines',
-    //             description: 'Techniques and tips for scanning Linux-based systems with Nmap.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap Port Specification and Scan Order',
-    //             description: 'How to specify ports and control scan order in Nmap.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap Scan Techniques (-sS, -ST, -SA, -SW, -SM)',
-    //             description: 'Explanation of different Nmap scan techniques including SYN scan, TCP connect scan, and others.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap OS and Service Detection, Aggressive Scan, UDP',
-    //             description: 'Methods for detecting operating systems, services, and using aggressive scan options in Nmap.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Range Scan, Results Diagnosis',
-    //             description: 'How to perform range scans and analyze scan results effectively.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Nmap Output and Verbosity',
-    //             description: 'Understanding and customizing Nmap output and verbosity levels.',
-    //             codeExamples: [],
-    //             additionalPointstitle : [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         }
-    //     ]
-    // },
     // {
     //     title: 'IDS Evasion Techniques',
     //     subcategories: [
