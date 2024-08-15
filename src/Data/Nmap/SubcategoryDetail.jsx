@@ -23,9 +23,21 @@ const Modal = ({ isOpen, imageSrc, onClose }) => {
   );
 };
 
+// Utility function to copy text to clipboard
+const copyToClipboard = (text, callback) => {
+  navigator.clipboard.writeText(text).then(() => {
+    callback(true);
+    setTimeout(() => callback(false), 2000); // Hide "Copied" message after 2 seconds
+  }).catch((err) => {
+    console.error('Failed to copy: ', err);
+    callback(false);
+  });
+};
+
 const SubcategoryDetail = ({ title, description, additionalPoints = [], additionalPointstitle = '', codeExamples = [], images = [], links = [] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const [copiedCodeIndex, setCopiedCodeIndex] = useState(null);
 
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
@@ -57,11 +69,17 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
         <div className="mb-4">
           <h4 className="text-lg font-semibold mb-2">Code Examples</h4>
           {codeExamples.map((example, index) => (
-            <div key={index} className="mb-4">
+            <div key={index} className="mb-4 relative">
               <pre className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto">{example.code}</pre>
               {example.description && (
                 <p className="text-gray-700 mt-2" dangerouslySetInnerHTML={{ __html: example.description }} />
               )}
+              <button 
+                onClick={() => copyToClipboard(example.code, (copied) => setCopiedCodeIndex(copied ? index : null))} 
+                className="absolute top-0 right-0 bg-zinc-700 text-white py-1 px-3 rounded hover:bg-purple-900"
+              >
+                {copiedCodeIndex === index ? 'Copied!' : 'Copy'}
+              </button>
             </div>
           ))}
         </div>
