@@ -684,7 +684,7 @@ const mainCategories = [
                 description: 'Enumerating MySQL databases and services with Nmap.',
                 codeExamples: [
                     {
-                        code: 'ls -al /usr/share/nmap/scripts | grep \"mysql\"',
+                        code: 'ls -al /usr/share/nmap/scripts | grep "mysql"',
                         "description": "Lists all Nmap scripts related to MySQL to identify available MySQL-related scripts in the Nmap script directory."
                     },
                     {
@@ -702,72 +702,72 @@ const mainCategories = [
                 description: 'Using Nmap for vulnerability scanning and assessment.',
                 codeExamples: [
                     {
-                        code: "nmap -sV --script=vulners.nse 192.168.1.1",
-                        description: "Scans the target IP address (192.168.1.1) to detect vulnerabilities using the 'vulners' script for version detection."
+                        code: 'nmap -sV --script=vulners.nse 192.168.1.1',
+                        description: 'Scans the target IP address (192.168.1.1) to detect vulnerabilities using the vulners script for version detection.'
                     }
                 ],
                 additionalPointstitle: [],
-                additionalPoints: ["During the scan, review the links provided to gain additional insights and learn more about the vulnerabilities detected."],
+                additionalPoints: ['During the scan, review the links provided to gain additional insights and learn more about the vulnerabilities detected.'],
                 images: [],
                 links: []
             },
             {
-                title: "Installing Webmap",
-                description: "Guide on installing and setting up Webmap for web application scanning.",
+                title: 'Installing Webmap',
+                description: 'Guide on installing and setting up Webmap for web application scanning.',
                 codeExamples: [
                     {
-                        code: "sudo apt update -y && sudo apt upgrade -y",
-                        description: "Updates the package list and upgrades existing packages to ensure the system is up-to-date."
+                        code: 'sudo apt update -y && sudo apt upgrade -y',
+                        description: 'Updates the package list and upgrades existing packages to ensure the system is up-to-date.'
                     },
                     {
-                        code: "sudo apt install docker.io -y",
-                        description: "Installs Docker, which is required to run the Webmap container."
+                        code: 'sudo apt install docker.io -y',
+                        description: 'Installs Docker, which is required to run the Webmap container.'
                     },
                     {
-                        code: "sudo systemctl enable docker",
-                        description: "Enables the Docker service to start on boot."
+                        code: 'sudo systemctl enable docker',
+                        description: 'Enables the Docker service to start on boot.'
                     },
                     {
-                        code: "sudo systemctl start docker",
-                        description: "Starts the Docker service. After running this command, use <span class=\"bg-gray-200 pl-2 pr-2 rounded-md text-purple-600\">ifconfig</span> to verify the Docker0 interface is active."
+                        code: 'sudo systemctl start docker',
+                        description: 'Starts the Docker service. After running this command, use <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">ifconfig</span> to verify the Docker0 interface is active.'
                     },
                     {
-                        code: "sudo mkdir docker",
-                        description: "Creates a directory named 'docker' for storing Docker-related files."
+                        code: 'sudo mkdir docker',
+                        description: 'Creates a directory named `docker` for storing Docker-related files.'
                     },
                     {
-                        code: "sudo docker run -d \\ \n--name webmap \\ \n-h webmap \\ \n-p 8000:8000 \\ \n-v /tmp/webmap:/opt/xml \\ \nreborntc/webmap",
-                        description: "Runs the Webmap container. After execution, wait for the download to complete. Verify successful download by running <span class=\"bg-gray-200 pl-2 pr-2 rounded-md text-purple-600\">sudo docker images</span> and ensure the Webmap image is listed."
+                        code: `sudo docker run -d --name webmap -h webmap -p 8000:8000 -v /tmp/webmap:/opt/xml reborntc/webmap`,
+                        description: 'Runs the Webmap container. After execution, wait for the download to complete. Verify successful download by running <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">sudo docker images</span> and ensure the Webmap image is listed.'
+                    },                    
+                    {
+                        code: 'sudo docker ps -a',
+                        description: 'Displays all Docker containers, including their status. Check for a container with <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">0000:8000</span>. Alternatively, you can access Webmap in a browser at <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">127.0.0.1:8000</span> or <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">eth0IP:8000</span>.'
                     },
                     {
-                        code: "sudo docker ps -a",
-                        description: "Displays all Docker containers, including their status. Check for a container with <span class=\"bg-gray-200 pl-2 pr-2 rounded-md text-purple-600\">0000:8000</span>. Alternatively, you can access Webmap in a browser at <span class=\"bg-gray-200 pl-2 pr-2 rounded-md text-purple-600\">127.0.0.1:8000</span> or <span class=\"bg-gray-200 pl-2 pr-2 rounded-md text-purple-600\">eth0IP:8000</span>."
-                    },
-                    {
-                        code: "sudo docker exec -ti webmap /root/token",
-                        description: "Generates a token. Copy the token from the output and paste it into your browser to access Webmap."
+                        code: 'sudo docker exec -ti webmap /root/token',
+                        description: 'Generates a token. Copy the token from the output and paste it into your browser to access Webmap.'
                     }
                 ],
-                'additionalPointstitle': [],
-                'additionalPoints': [],
-                'images': [],
-                'links': [
-                    "https://github.com/SabyasachiRana/WebMap.git"
+                additionalPointstitle: [],
+                additionalPoints: [],
+                images: [],
+                links: [
+                    'https://github.com/SabyasachiRana/WebMap.git'
                 ]
             },                      
             {
-                title: 'Nmap Scanning and Generating a Report',
+                title:'Nmap Scanning and Generating a Report',
                 description: 'Techniques for scanning with Nmap and generating detailed reports.',
                 codeExamples: [
                     {
-                        code: "sudo nmap -sV --script=vulners 192.168.1.1 -oX web.xml",
-                        description: "Performs a scan using Nmap with version detection and vulnerability script, saving the output in XML format."
+                        code: 'sudo nmap -sV --script=vulners 192.168.1.1 -oX web.xml',
+                        description: 'Performs a scan using Nmap with version detection and vulnerability script, saving the output in XML format.'
                     }
                 ],
                 additionalPointstitle: [],
                 additionalPoints: [
                     '1. First, perform scanning using Given command (You can modify this code as you need.).This command will take some time to complete. After the scan is finished, copy the XML file.',
-                    '2. Navigate to the File System > temp folder. Right-click the folder, open the terminal, and use <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">sudo su</span> to gain superuser privileges. Then, move the XML file to the Webmap folder using the command: <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600" >mv web.xmlfile-path  /tmp/webmap </span>.',
+                    '2. Navigate to the <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File System > temp </span>folder. Right-click the folder, open the terminal, and use <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">sudo su</span> to gain superuser privileges. Then, move the XML file to the Webmap folder using the command: <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600" >mv web.xmlfile-path  /tmp/webmap </span>.',
                     '3. Open Webmap and You can see the file.',
                     // also do  <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File > Import > Open File</span> and select the xml file.
                     '4. Explore the results in Webmap and practice analyzing the data.'
