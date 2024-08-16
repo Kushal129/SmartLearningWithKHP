@@ -769,9 +769,9 @@ const mainCategories = [
                     '1. First, perform scanning using Given command (You can modify this code as you need.).This command will take some time to complete. After the scan is finished, copy the XML file.',
                     '2. Navigate to the <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File System > temp </span>folder. Right-click the folder, open the terminal, and use <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">sudo su</span> to gain superuser privileges. Then, move the XML file to the Webmap folder using the command: <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600" >mv web.xmlfile-path  /tmp/webmap </span>.',
                     '3. Open Webmap and You can see the file.',
-                    // also do  <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File > Import > Open File</span> and select the xml file.
                     '4. Explore the results in Webmap and practice analyzing the data.'
-                ],
+                    ],
+                    // also do  <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File > Import > Open File</span> and select the xml file.
                 images: [],
                 links: ['https://github.com/SabyasachiRana/WebMap.git']
             }            

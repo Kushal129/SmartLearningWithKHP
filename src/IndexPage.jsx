@@ -50,7 +50,7 @@ const IndexPage = () => {
   return (
     <div className="min-h-screen flex flex-col rounded-xl">
       <main className="flex-grow p-8">
-        <h1 className="text-4xl font-extrabold mb-12 text-gray-900 text-center">
+        <h1 className="lg:text-4xl text-3xl font-extrabold mb-12 text-gray-900 text-center">
           Welcome to SmartLearning with <span className="text-purple-800">KHP</span>
         </h1>
 

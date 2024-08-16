@@ -14,20 +14,22 @@ import AboutUsPage from './components/About';
 function App() {
   return (
     <Router>
-      <Header />
-      <main className="flex-grow p-6 bg-gradient-to-br from-white via-white to-purple-200">
-        <Breadcrumb />
-        <Routes>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/Nmap" element={<NmapPage />} />
-          <Route path="/Kali-installation" element={<KaliInstallationPage />} />
-          <Route path="/Contact" element={<ContactUsPage />} />
-          <Route path="/About" element={<AboutUsPage />} />
-          <Route path="/AllPortsList" element={<AllPortsList />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <Footer />
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow lg:p-6 bg-gradient-to-br from-white via-white to-purple-200 overflow-auto">
+          <Breadcrumb />
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/Nmap" element={<NmapPage />} />
+            <Route path="/Kali-installation" element={<KaliInstallationPage />} />
+            <Route path="/Contact" element={<ContactUsPage />} />
+            <Route path="/About" element={<AboutUsPage />} />
+            <Route path="/AllPortsList" element={<AllPortsList />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

@@ -21,7 +21,7 @@ const CategoryItem = ({ title, subcategories, isOpen, onClick }) => {
         </span>
       </div>
       {isOpen && (
-        <ul className="-mt-2 space-y-2 bg-gray-100 shadow-md rounded-b-md p-3">
+        <ul className="-mt-2 space-y-2 bg-gray-100 shadow-md rounded-b-md p-2">
           {subcategories.map((sub, index) => (
             <li key={index} className="py-1 bg-gray-100 rounded-b-md">
               <button

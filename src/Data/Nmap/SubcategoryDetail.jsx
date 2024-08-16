@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaRegCopy } from 'react-icons/fa'; // Import React copy icon
-import { LuClipboardCheck } from 'react-icons/lu'; // Import React check icon
+import { FaRegCopy } from 'react-icons/fa'; 
+import { LuClipboardCheck } from 'react-icons/lu'; 
 
 // Modal component
 const Modal = ({ isOpen, imageSrc, onClose }) => {
@@ -25,11 +25,10 @@ const Modal = ({ isOpen, imageSrc, onClose }) => {
   );
 };
 
-// Utility function to copy text to clipboard
 const copyToClipboard = (text, callback) => {
   navigator.clipboard.writeText(text).then(() => {
     callback(true);
-    setTimeout(() => callback(false), 2000); // Hide "Copied" message after 2 seconds
+    setTimeout(() => callback(false), 2000); 
   }).catch((err) => {
     console.error('Failed to copy: ', err);
     callback(false);
@@ -72,7 +71,7 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
           <h4 className="text-lg font-semibold mb-2">Code Examples</h4>
           {codeExamples.map((example, index) => (
             <div key={index} className="mb-4 relative">
-              <pre className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto whitespace-pre-wrap">{example.code}</pre>
+              <pre className="bg-gray-900 text-white lg:p-4 p-2 rounded-lg overflow-x-auto whitespace-pre-wrap">{example.code}</pre>
               {example.description && (
                 <p className="text-gray-700 mt-2" dangerouslySetInnerHTML={{ __html: example.description }} />
               )}
@@ -80,18 +79,18 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
                 onClick={() => {
                   copyToClipboard(example.code, (copied) => setCopiedCodeIndex(copied ? index : null));
                 }}
-                className={`absolute top-2 right-2 text-gray-400 hover:text-gray-300 cursor-pointer md:hidden ${copiedCodeIndex === index ? 'hidden' : 'block'}`}
+                className={`absolute top-2 right-2 text-gray-400 hover:text-gray-300 cursor-pointer sm:block md:block lg:hidden ${copiedCodeIndex === index ? 'hidden' : 'block'} `}
                 size={20}
               />
               {copiedCodeIndex === index && (
                 <LuClipboardCheck
-                  className="absolute top-2 right-2 text-green-500 cursor-pointer md:hidden"
+                  className="absolute top-2 right-2 text-white cursor-pointer sm:block md:block lg:hidden"
                   size={20}
                 />
               )}
               <button
                 onClick={() => copyToClipboard(example.code, (copied) => setCopiedCodeIndex(copied ? index : null))}
-                className="absolute top-2 right-2 hidden md:block bg-zinc-700 text-white py-1 px-3 rounded hover:bg-purple-900"
+                className="absolute top-2 right-2 hidden lg:block  bg-zinc-700 text-white py-1 px-3 rounded hover:bg-purple-900"
               >
                 {copiedCodeIndex === index ? 'Copied!' : 'Copy'}
               </button>
@@ -136,7 +135,6 @@ const SubcategoryDetail = ({ title, description, additionalPoints = [], addition
           </ul>
         </div>
       )}
-
 
       <Modal isOpen={isModalOpen} imageSrc={selectedImage} onClose={closeModal} />
     </div>

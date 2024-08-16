@@ -10,8 +10,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* About Section */}
           <div className="text-center md:text-left mb-6 md:mb-0">
-            <Link to="/about" className="text-2xl font-bold text-white hover:text-purple-300 cursor-pointer mb-3">Discover SmartLearning with KPH</Link>
-            <p className="text-gray-600 mt-2">
+            <Link to="/about" className="text-2xl font-bold text-white hover:text-purple-300 cursor-pointer mb-3 block md:inline">Discover SmartLearning with KPH</Link>
+            <p className="text-gray-400 mt-2">
               Unlock your potential with our expert-guided tutorials on network scanning, cybersecurity, and beyond.
             </p>
           </div>
@@ -24,8 +24,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Links */}
-
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap justify-center md:justify-start space-x-4 mb-4 md:mb-0">
             <a href="https://www.github.com/Kushal129" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-gray-100 transition-colors duration-300">
               <FaGithub size={24} />
             </a>
