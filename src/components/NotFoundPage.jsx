@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Adjust the import based on your routing library
-
+import { Link } from 'react-router-dom';
 const NotFoundPage = () => (
   <div className="text-center p-6">
     <h1 className="text-6xl text-purple-900 font-bold mb-4">404 Not Found</h1>
