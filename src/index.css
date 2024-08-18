@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Selection Color */
+@layer utilities {
+  ::selection {
+    @apply bg-purple-800 text-white;
+  }
+}
+
+/* Custom Scrollbar Styles */
+@layer utilities {
+  html, body {
+    scrollbar-width: thin;
+    scrollbar-color: #39004a #fcfcfc;
+  }
+
+  /* WebKit browsers (Chrome, Safari, Edge) */
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+
+  html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+    background-color: #39004a;
+    border-radius: 15px;
+  }
+
+  html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+    background-color: #ffffff;
+  }
+}

@@ -10,6 +10,7 @@ import Header from './components/Header';
 import NotFoundPage from './components/NotFoundPage';
 import ContactUsPage from './components/ContactUsPage';
 import AboutUsPage from './components/About';
+import ShortlyContent from './components/ShortlyContent';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Contact" element={<ContactUsPage />} />
             <Route path="/About" element={<AboutUsPage />} />
             <Route path="/AllPortsList" element={<AllPortsList />} />
+            <Route path="/All-ShortlyContent" element={<ShortlyContent />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

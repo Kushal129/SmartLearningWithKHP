@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import { useSpring, animated } from '@react-spring/web';
 import { Link } from 'react-router-dom';
 import { FaRegWindowClose, FaSearch } from 'react-icons/fa';
+import ShortlyData from './Shortlydata';
 
 const cards = [
   {
@@ -14,15 +16,15 @@ const cards = [
     title: 'Nmap',
     description: 'Learn about network scanning with Nmap.',
     path: '/nmap',
-    icon: <img src='https://miro.medium.com/v2/resize:fit:351/0*P4UVvCNl7EX4Xfgn.png' className='w-[50%] h-[50%]'/>
+    icon: <img src='https://miro.medium.com/v2/resize:fit:351/0*P4UVvCNl7EX4Xfgn.png' className='w-[50%] h-[50%]' />
   },
   {
     title: 'All Port List',
     description: 'All Networks Port List',
     path: '/AllPortsList',
     icon: <img src='https://ipvm-uploads.s3.amazonaws.com/uploads/a4ca/a530/ethernet.png' className='w-[50%] h-[50%]' />
-  }, 
-  
+  },
+
 ];
 
 // const deftcards = [
@@ -33,7 +35,6 @@ const cards = [
 //     icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
 //   },
 // ];
-
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const springProps = useSpring({
@@ -46,6 +47,14 @@ const IndexPage = () => {
     card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     card.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Sort shortlyData by date and time in descending order
+  const sortedData = ShortlyData.sort((a, b) =>
+    new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time)
+  );
+
+  // Slice to show only the latest 4 items
+  const latestData = sortedData.slice(0, 4);
 
   return (
     <div className="min-h-screen flex flex-col rounded-xl">
@@ -62,7 +71,7 @@ const IndexPage = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full px-4 py-2 pl-10 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300"
+              className="w-full px-4 py-2 pl-10 border rounded-lg shadow-md focus:outline-none focus:ring-1 focus:ring-purple-500 transition-shadow duration-300"
             />
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
               <FaSearch className="text-lg" />
@@ -70,7 +79,11 @@ const IndexPage = () => {
           </div>
         </div>
 
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Cards Grid */}
+        <animated.div
+          style={springProps}
+          className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {filteredCards.length > 0 ? filteredCards.map((card, index) => (
             <animated.div
               key={index}
@@ -91,8 +104,37 @@ const IndexPage = () => {
               <span>No results found for "<strong>{searchQuery}</strong>"</span>
             </p>
           )}
+        </animated.div>
 
-          {/* {deftcards.map((card, index) => (
+        {/* Latest Cybersecurity Updates */}
+        <animated.div
+          style={springProps}
+          className="mt-12"
+        >
+          <div className="container mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-4">Latest Cybersecurity Updates</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {latestData.map((item, index) => (
+                <div key={index} className="bg-white p-4 rounded-lg shadow-lg">
+                  <img src={item.image} alt={item.title} className="w-full h-40 object-cover rounded-lg mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-gray-600 mb-4">{item.description}</p>
+                  <p className="text-gray-400 text-sm">{moment(item.date + ' ' + item.time).format('MMMM D, YYYY h:mm A')}</p>
+                </div>
+              ))}
+            </div>
+            {sortedData.length > 4 && (
+              <div className="mt-8 text-center">
+                <Link to="/All-ShortlyContent" className="bg-purple-600 hover:bg-purple-800 text-white px-4 py-2 rounded-lg">
+                  See More ?
+                </Link>
+              </div>
+            )}
+          </div>
+
+        </animated.div>
+
+        {/* {deftcards.map((card, index) => (
             <animated.div
               key={index}
               style={springProps}
@@ -107,7 +149,9 @@ const IndexPage = () => {
               </Link>
             </animated.div>
           ))} */}
-        </div>
+
+
+
       </main>
     </div>
   );
