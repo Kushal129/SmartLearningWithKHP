@@ -5,6 +5,16 @@ import { Link } from 'react-router-dom';
 import { FaRegWindowClose, FaSearch } from 'react-icons/fa';
 import ShortlyData from './Shortlydata';
 
+
+// const deftcards = [
+//   {
+//     title: 'Under Development Nmap',
+//     description: 'This section is under development.',
+//     path: '/',
+//     icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
+//   },
+// ];
+
 const cards = [
   {
     title: 'Kali Linux in VMware Installation',
@@ -24,19 +34,11 @@ const cards = [
     path: '/AllPortsList',
     icon: <img src='https://ipvm-uploads.s3.amazonaws.com/uploads/a4ca/a530/ethernet.png' className='w-[50%] h-[50%]' />
   },
-
 ];
 
-// const deftcards = [
-//   {
-//     title: 'Under Development Nmap',
-//     description: 'This section is under development.',
-//     path: '/',
-//     icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
-//   },
-// ];
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedItemIndex, setExpandedItemIndex] = useState(null);
   const springProps = useSpring({
     from: { opacity: 0, transform: 'translateY(50px)' },
     to: { opacity: 1, transform: 'translateY(0px)' },
@@ -55,6 +57,10 @@ const IndexPage = () => {
 
   // Slice to show only the latest 4 items
   const latestData = sortedData.slice(0, 4);
+
+  const handleToggleExpand = (index) => {
+    setExpandedItemIndex(expandedItemIndex === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen flex flex-col rounded-xl">
@@ -118,8 +124,18 @@ const IndexPage = () => {
                 <div key={index} className="bg-white p-4 rounded-lg shadow-lg">
                   <img src={item.image} alt={item.title} className="w-full h-40 object-cover rounded-lg mb-4" />
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
-                  <p className="text-gray-400 text-sm">{moment(item.date + ' ' + item.time).format('MMMM D, YYYY h:mm A')}</p>
+                  <p className="text-gray-600 mb-4">
+                    {expandedItemIndex === index ? item.description : `${item.description.slice(0, 100)}...`}
+                  </p>
+                  {item.description.length > 100 && (
+                    <button
+                      className="text-purple-800 hover:underline"
+                      onClick={() => handleToggleExpand(index)}
+                    >
+                      {expandedItemIndex === index ? 'View Less' : 'View More'}
+                    </button>
+                  )}
+                  <p className="text-gray-400 text-sm hidden">{moment(item.date + ' ' + item.time).format('MMMM D, YYYY h:mm A')}</p>
                 </div>
               ))}
             </div>
@@ -131,10 +147,12 @@ const IndexPage = () => {
               </div>
             )}
           </div>
-
         </animated.div>
 
-        {/* {deftcards.map((card, index) => (
+
+
+
+         {/* {deftcards.map((card, index) => (
             <animated.div
               key={index}
               style={springProps}
@@ -149,9 +167,6 @@ const IndexPage = () => {
               </Link>
             </animated.div>
           ))} */}
-
-
-
       </main>
     </div>
   );

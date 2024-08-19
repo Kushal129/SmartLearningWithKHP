@@ -30,7 +30,7 @@ const ShortlyData = [
     },
     {
         title: 'The Role of Encryption in Networking',
-        image: 'https://tse3.mm.bing.net/th?id=OIP.BDwI0Q4_3DujCpaysMcNGQHaDG&pid=Api&P=0&h=180',
+        image: 'https://images.ctfassets.net/yewqr8zk7e5s/migrated-4572/61ee98fb5087c9873948b5473cfafb16/encryption-encoding-hashing.jpg',
         description: 'Discusses the principles of encryption and its critical role in protecting data transmitted over networks. Includes different encryption techniques and their applications.',
         date: '2024-08-18',
         time: '1:00 PM'
@@ -55,7 +55,80 @@ const ShortlyData = [
         description: 'Describes the Zero Trust Architecture model, which requires strict identity verification for every user and device attempting to access resources, regardless of their location.',
         date: '2024-08-18',
         time: '4:00 PM'
-    }
+    },
+    {
+        title: 'Understanding IP Header Structures',
+        image: 'https://static.thegeekstuff.com/wp-content/uploads/2012/03/ip-header-2.png',
+        description: 'Explains the structure of IP headers in network packets. IP headers contain critical information for routing and delivering packets across networks, such as source and destination IP addresses, packet length, and protocol type. Understanding these structures is essential for network troubleshooting and security.',
+        date: '2024-08-19',
+        time: '10:00 AM'
+    },
+    {
+        title: 'TCP vs UDP: A Comparative Overview',
+        image: 'https://www.freecodecamp.org/news/content/images/2021/07/udp-and-tcp-comparison.jpg',
+        description: 'This comparison highlights the key differences between TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). TCP is a connection-oriented protocol that ensures reliable, ordered, and error-checked delivery of data between applications. In contrast, UDP is a connectionless protocol that offers faster data transfer but does not guarantee delivery or order. Understanding these differences is crucial for selecting the appropriate protocol based on application needs and network conditions.',
+        date: '2024-08-19',
+        time: '2:00 PM'
+    },
+    {
+        title: 'Dark & Deep Web: Understanding the Layers of the Internet',
+        image: 'https://sp-ao.shortpixel.ai/client/q_glossy,ret_img,w_640/https://s22908.pcdn.co/wp-content/uploads/2020/07/deep-web-iceberg.jpg',
+        description: 'The deep web encompasses all online content not indexed by standard search engines, including private databases and fee-for-service sites. The dark web, a subset of the deep web, is accessible only through specialized networks like Tor and allows for anonymous communication and transactions. While the deep web enhances privacy and access to information, the dark web poses security risks and can be used for illicit activities, impacting overall internet quality.',
+        date: '2024-08-19',
+        time: '12:00 AM'
+    },    
+    {
+        title: 'Steps in Sending Data Over the Internet',
+        image: 'https://img.freepik.com/premium-vector/technology-sending-data-files-internet-network-sending-files-via-email-system_111088-507.jpg',
+        description: 'During the process of sending data over the Internet, the steps occur in the following order: 1. **DNS Resolution** - Resolving the domain name to an IP address. 2. **Routing** - Determining the path the data will take through the network. 3. **Data Transmission** - Sending the actual data to the destination.',
+        date: '2024-08-19',
+        time: '4:00 PM'
+    },
+    {
+        title: 'List of TCP/IP Protocols',
+        image: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/b/7/3/b73dc9c176_50175729_tcp.jpg',
+        description: 'The following are key protocols in the TCP/IP protocol suite: TCP, UDP, IP, ICMP, ARP, SMTP, HTTP, FTP, SNMP, and DHCP.',
+        date: '2024-08-19',
+        time: '4:15 PM'
+    },
+    {
+        title: 'Regional Internet Registries (RIRs)',
+        image: 'https://www.nro.net/wp-content/uploads/RIR-Map-Website-1024x576.jpg',
+        description: 'Regional Internet Registries (RIRs) manage the allocation and registration of IP addresses within their respective regions. Examples of RIRs include **ARIN** (American Registry for Internet Numbers) and **RIPE NCC** (Réseaux IP Européens Network Coordination Centre).',
+        date: '2024-08-19',
+        time: '4:00 PM'
+    },
+    {
+        title: 'IP Fragmentation',
+        image: 'https://image.slideserve.com/1385714/ip-fragmentation-l.jpg',
+        description: 'When a host dispatches an IP packet onto the network, its size must adhere to the maximum limit supported by the local network, known as the Maximum Transmission Unit (MTU). In Ethernet networks, the standard MTU is 1500 bytes. If a datagram size is smaller than or equal to the MTU, it is transmitted without fragmentation. If the datagram size exceeds the MTU, the router fragments the datagram into smaller pieces, each fitting within the MTU size.',
+        date: '2024-08-19',
+        time: '4:40 PM'
+    },
+    {
+        title: 'What is a Subnet?',
+        image: 'https://grammartop.com/wp-content/uploads/2021/03/subnet-be9f63652366340caa7bfcbede74bda073bb974b.png',
+        description: 'A subnet, or sub-network, is a segmented component within a larger network, representing a logical division of an IP network into smaller segments. For instance, a network with the IP address 192.168.1.0/24 can be divided into multiple subnets. By subnetting, you might create two subnets: 192.168.1.0/25 and 192.168.1.128/25. This division reduces broadcast traffic and improves efficiency. Organizations use subnets to manage large networks, such as creating separate subnets for different departments to enhance performance and simplify network management.',
+        date: '2024-08-19',
+        time: '4:50 PM'
+    },
+    {
+        title: 'What is a Subnet Mask?',
+        image: 'https://www.labsrc.com/wp-content/uploads/2016/04/hi-subnetmask.png',
+        description: 'A subnet mask is used to divide an IP network into subnets and helps routers route data packets to the correct destination within a network. It works alongside an IP address to define the network and host portions of an address. For example, with an IP address of 192.0.2.15 and a subnet mask of 255.255.255.0 (or /24), the network portion is 192.0.2.0. Routers use the subnet mask to determine the correct subnet for forwarding the packet. In this case, the subnet mask helps route the packet to the appropriate subnet where the destination IP address 192.0.2.15 resides.',
+        date: '2024-08-19',
+        time: '4:55 PM'
+    },
+    {
+        title: 'IPv4 vs IPv6',
+        image: 'https://www.setakit.com/wp-content/uploads/2022/05/IPV4-vs-IPV6.png',
+        description: 'IPv4 and IPv6 are two versions of the Internet Protocol used to identify and locate devices on a network. IPv4, with a 32-bit address space, supports approximately 4.3 billion addresses, while IPv6, with a 128-bit address space, supports about 340 undecillion addresses, addressing the limitations of IPv4. IPv6 also includes improved features such as simplified header format, better support for Quality of Service (QoS), and built-in security with IPsec. Transitioning from IPv4 to IPv6 addresses the growing need for more IP addresses due to the increasing number of devices connected to the Internet.',
+        date: '2024-08-19',
+        time: '5:00 PM'
+    },                
+    
+        
+    
 ];
 
 export default ShortlyData;

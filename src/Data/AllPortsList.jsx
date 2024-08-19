@@ -30,6 +30,7 @@ const ports = [
   { number: 5000, category: 'Networking', service: 'UPnP', description: '<span class="font-bold">Universal Plug and Play (UPnP)</span> is used for network device discovery and management.' },
   { number: 9200, category: 'Search', service: 'Elasticsearch', description: '<span class="font-bold">Elasticsearch</span> uses this port for search and analytics services.' },
   { number: 10000, category: 'Administration', service: 'Webmin', description: '<span class="font-bold">Webmin</span> is a web-based interface for system administration.' },
+  { number: 10001, category: 'Networking', service: 'SCTP', description: '<span class="font-bold">SCTP</span> (Stream Control Transmission Protocol) is a transport layer protocol used for network communication.' },
 ];
 
 const ITEMS_PER_PAGE = 10;
