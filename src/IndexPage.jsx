@@ -118,7 +118,7 @@ const IndexPage = () => {
           className="mt-12"
         >
           <div className="container mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-4">Latest Cybersecurity Updates</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">Latest Cybersecurity Shortly content</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {latestData.map((item, index) => (
                 <div key={index} className="bg-white p-4 rounded-lg shadow-lg">

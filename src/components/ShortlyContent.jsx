@@ -27,7 +27,7 @@ const AllShortlyContent = () => {
 
   return (
     <div className="container mx-auto m-3">
-      <h2 className="text-2xl font-bold text-center mb-4">All Cybersecurity Updates</h2>
+      <h2 className="text-2xl font-bold text-center mb-4">All Cybersecurity Shortly Content</h2>
       
       <div className="mb-4 flex justify-center">
         <div className="relative w-full max-w-md">
