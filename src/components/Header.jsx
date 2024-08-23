@@ -29,7 +29,7 @@ const Header = () => {
         <Link
           to="/"
           className="hidden md:block text-2xl font-bold text-purple-900 hover:text-gray-700 transition-colors duration-300">
-          SmartLearning With KPH
+          SmartLearning With KHP
         </Link>
 
         {/* Mobile Menu Button */}
