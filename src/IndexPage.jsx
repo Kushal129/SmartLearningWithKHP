@@ -5,16 +5,6 @@ import { Link } from 'react-router-dom';
 import { FaRegWindowClose, FaSearch } from 'react-icons/fa';
 import ShortlyData from './Shortlydata';
 
-
-// const deftcards = [
-//   {
-//     title: 'Under Development Nmap',
-//     description: 'This section is under development.',
-//     path: '/',
-//     icon: <GiEyeTarget className="text-6xl text-gray-400 mb-4" />
-//   },
-// ];
-
 const cards = [
   {
     title: 'Kali Linux in VMware Installation',
@@ -118,24 +108,29 @@ const IndexPage = () => {
           className="mt-12"
         >
           <div className="container mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-4">Latest Cybersecurity Shortly content</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">Latest Cybersecurity Shortly Content</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {latestData.map((item, index) => (
                 <div key={index} className="bg-white p-4 rounded-lg shadow-lg">
                   <img src={item.image} alt={item.title} className="w-full h-40 object-cover rounded-lg mb-4" />
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-4">
-                    {expandedItemIndex === index ? item.description : `${item.description.slice(0, 100)}...`}
+                  <p className={`text-gray-600 mb-4 ${expandedItemIndex === index ? '' : 'truncate'}`}>
+                    {item.description}
                   </p>
-                  {item.description.length > 100 && (
-                    <button
-                      className="text-purple-800 hover:underline"
-                      onClick={() => handleToggleExpand(index)}
-                    >
-                      {expandedItemIndex === index ? 'View Less' : 'View More'}
-                    </button>
+                  {item.additionalPoints && item.additionalPoints.length > 0 && (
+                    <ul className={`list-disc list-inside text-gray-600 mt-4 ${expandedItemIndex === index ? '' : 'max-h-32 overflow-hidden'}`}>
+                      {item.additionalPoints.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
                   )}
-                  <p className="text-gray-400 text-sm hidden">{moment(item.date + ' ' + item.time).format('MMMM D, YYYY h:mm A')}</p>
+                  <button
+                    className="text-purple-800 hover:underline mt-2 block"
+                    onClick={() => handleToggleExpand(index)}
+                  >
+                    {expandedItemIndex === index ? 'View Less' : 'View More'}
+                  </button>
+                  <p className="text-gray-400 text-sm mt-2">{moment(item.date + ' ' + item.time).format('MMMM D, YYYY h:mm A')}</p>
                 </div>
               ))}
             </div>
@@ -148,25 +143,6 @@ const IndexPage = () => {
             )}
           </div>
         </animated.div>
-
-
-
-
-         {/* {deftcards.map((card, index) => (
-            <animated.div
-              key={index}
-              style={springProps}
-              className="bg-gray-200 shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300"
-            >
-              <Link to={card.path} className="block p-6 text-center cursor-not-allowed">
-                <div className="flex items-center justify-center mb-4 p-4 rounded-full">
-                  {card.icon}
-                </div>
-                <h2 className="text-2xl font-semibold mb-2 text-gray-900">{card.title}</h2>
-                <p className="text-gray-600">{card.description}</p>
-              </Link>
-            </animated.div>
-          ))} */}
       </main>
     </div>
   );
