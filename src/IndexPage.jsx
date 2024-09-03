@@ -9,13 +9,13 @@ const cards = [
   {
     title: 'Kali Linux in VMware Installation',
     description: 'Guide to installing Kali Linux into VMware.',
-    path: '/kali-installation',
+    path: '/Kali-Installation',
     icon: <img src='https://cdn-icons-png.flaticon.com/512/15465/15465695.png' className='w-[50%] h-[50%]' />
   },
   {
     title: 'Nmap',
     description: 'Learn about network scanning with Nmap.',
-    path: '/nmap',
+    path: '/Nmap',
     icon: <img src='https://miro.medium.com/v2/resize:fit:351/0*P4UVvCNl7EX4Xfgn.png' className='w-[50%] h-[50%]' />
   },
   {
@@ -24,6 +24,13 @@ const cards = [
     path: '/AllPortsList',
     icon: <img src='https://ipvm-uploads.s3.amazonaws.com/uploads/a4ca/a530/ethernet.png' className='w-[50%] h-[50%]' />
   },
+  // sql injeaction
+  {
+    title: 'SQL Injection',
+    description: 'Learn about SQL Injection 0 to PRO.',
+    path: '/Sql-injection',
+    icon: <img src='https://miro.medium.com/v2/resize:fit:828/format:webp/1*kPOMkxicnlfdeqibsnvZeA.jpeg' className='w-[100%] h-[100%]' />
+  }
 ];
 
 const IndexPage = () => {
@@ -90,7 +97,7 @@ const IndexPage = () => {
                 <div className="flex items-center justify-center mb-4 p-4 rounded-full transition-colors duration-200">
                   {card.icon}
                 </div>
-                <h2 className="text-2xl font-semibold mb-2 text-gray-900 group-hover:text-gray-800">{card.title}</h2>
+                <h2 className="text-2xl font-semibold mb-2 text-purple-700 group-hover:text-purple-800">{card.title}</h2>
                 <p className="text-gray-600 group-hover:text-gray-500">{card.description}</p>
               </Link>
             </animated.div>

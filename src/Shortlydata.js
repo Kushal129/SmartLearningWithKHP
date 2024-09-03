@@ -297,6 +297,9 @@ const ShortlyData = [
         date: '2024-08-31',
         time: '10:40 AM'
     },
+    // SAM windwod file Secuerity valu...
+    // gpedit valu koi p valstu ne ban karva group policy ex disale windows installwe
+    // wmic useraccount get name,sid sid jova ate
 
 
 ];

@@ -5,6 +5,7 @@ import NmapPage from './Data/Nmap/NmapPage';
 import KaliInstallationPage from './Data/KaliInstallationPage';
 import AllPortsList from './Data/AllPortsList';
 import Breadcrumb from './components/Breadcrumb';
+import SqlInjection from './Data/Sql_Injection/Sql-Injection';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import NotFoundPage from './components/NotFoundPage';
@@ -21,11 +22,12 @@ function App() {
           <Breadcrumb />
           <Routes>
             <Route path="/" element={<IndexPage />} />
-            <Route path="/Nmap" element={<NmapPage />} />
-            <Route path="/Kali-installation" element={<KaliInstallationPage />} />
-            <Route path="/Contact" element={<ContactUsPage />} />
             <Route path="/About" element={<AboutUsPage />} />
+            <Route path="/Contact" element={<ContactUsPage />} />
+            <Route path="/Nmap" element={<NmapPage />} />
+            <Route path="/Kali-Installation" element={<KaliInstallationPage />} />
             <Route path="/AllPortsList" element={<AllPortsList />} />
+            <Route path="/Sql-Injection" element={<SqlInjection />} />
             <Route path="/All-ShortlyContent" element={<ShortlyContent />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
