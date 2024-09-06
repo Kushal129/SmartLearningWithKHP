@@ -297,9 +297,76 @@ const ShortlyData = [
         date: '2024-08-31',
         time: '10:40 AM'
     },
-    // SAM windwod file Secuerity valu...
-    // gpedit valu koi p valstu ne ban karva group policy ex disale windows installwe
-    // wmic useraccount get name,sid sid jova ate
+    {
+        title: 'What is Cloud Computing?',
+        image: 'https://strucsoftsolutions.com/wp-content/uploads/2023/02/elements_of_cloud_computing_2021.png',
+        description: 'Cloud computing delivers computing services like servers, storage, databases, networking, and more over the internet instead of local devices.',
+        additionalPoints: [
+            'On-demand self-service: Users can get services like storage or servers whenever they need without waiting for anyone.',
+            'Broad network access: Cloud services are available anywhere using devices like phones, laptops, or tablets.',
+            'Resource pooling: Cloud providers share resources like servers to serve multiple users, adjusting based on demand.',
+            'Rapid elasticity: Cloud services can grow or shrink quickly based on how much you need.',
+            'Measured service: You only pay for what you use, and the system tracks your usage automatically.'
+        ],
+        date: '2024-09-06',
+        time: '10:00 AM'
+    },
+    {
+        title: 'Four Pillars of Cloud Security',
+        image: 'https://miro.medium.com/v2/resize:fit:1400/format:webp/1*gP3iGEl2-7dZKzo92YFiIA.jpeg',
+        description: 'Key components of cloud security to protect data and systems.',
+        additionalPoints: [
+            'Visibility and Compliance: Ensuring all assets are secure and follow the rules.',
+            'Compute-based Security: Protecting systems and services in the cloud from threats.',
+            'Network Protections: Securing traffic and data within the cloud.',
+            'Identity and Access Management: Managing who can access what in the cloud.'
+        ],
+        date: '2024-09-06',
+        time: '10:20 AM'
+    },
+    {
+        title: 'Risks & Threats of Cloud Security',
+        image: 'https://apac.lumen.com/wp-content/uploads/2023/06/Cloud-Security-Hero-1200x628.webp',
+        description: 'Common risks that affect cloud security.',
+        additionalPoints: [
+            'System Misconfigurations: Mistakes like wrong settings can lead to security holes.',
+            'Online Account Hacking: Weak passwords make it easy for hackers to get in.',
+            'Zero-Day Attacks: Hackers exploit new weaknesses before they are fixed.',
+            'Insider Threats: Employees may accidentally cause security problems.',
+            'Malware: Cloud makes sharing easier, but also spreads malware.',
+            'Data Loss: Hackers may delete or lock data for ransom, and errors during migration can cause data loss.'
+        ],
+        date: '2024-09-06',
+        time: '12:00 PM'
+    },
+    {
+        title: 'Understanding NTLM & Kerberos',
+        image: 'https://miro.medium.com/v2/resize:fit:828/format:webp/1*wrdvpUZwnG1slN0bCHqMGg.png',
+        description: 'NTLM and Kerberos are protocols for user authentication.',
+        additionalPoints: [
+            'NTLM: An older protocol for user authentication, using password hashing.',
+            'Kerberos: A newer protocol using tickets and encryption for secure authentication.',
+            'NTLM v/s Kerberos: NTLM uses a 3-step process and password hashing, while Kerberos uses tickets and encryption for stronger security.'
+        ],
+        date: '2024-09-06',
+        time: '10:40 PM'
+    },
+    {
+        title: 'What are sid Security Identifiers?',
+        image: 'https://cdn.ttgtmedia.com/rms/onlineimages/getting_SID_command_line_1.jpg',
+        description: 'SIDs are unique strings in Windows used to identify computers, users, and groups.',
+        additionalPoints: [
+            'Well-known SIDs: Predefined for specific roles like "Administrators" or "Everyone".',
+            'Relative Identifier (RID): Unique part added to the domain SID.',
+            'Security Account Manager (SAM): Root SID used to generate unique identifiers.',
+            'Active Directory (AD): Based on domain SID with unique IDs for each object.',
+            'Virtual Account (VA): SIDs for virtual accounts that run services separately.',
+            'Command to check SID: Use "wmic useraccount get name,sid" in Command Prompt or check in "regedit" under HKEY_LOCAL_MACHINE > SOFTWARE > Microsoft > Windows NT > CurrentVersion > ProfileList.'
+        ],
+        date: '2024-09-06',
+        time: '2:30 PM'
+    },
+
 
 
 ];
