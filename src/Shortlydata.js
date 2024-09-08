@@ -1,4 +1,4 @@
-// src/data/ShortlyData.js
+import linux from '../public/Linux.png';
 const ShortlyData = [
     {
         title: 'The Importance of Network Security',
@@ -366,9 +366,36 @@ const ShortlyData = [
         date: '2024-09-06',
         time: '2:30 PM'
     },
-
-
-
+    {
+        title: 'Direct Sudo Login (Reset Password)',
+        image: 'https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2021/09/Sudo-users.jpg?q=50&fit=crop&w=1100&h=618&dpr=1.5',
+        description: 'Follow these steps to reset your password if you forget it.',
+        additionalPoints: [
+            '1. Shutdown Kali and press "e" to edit the boot options.',
+            '2. Scroll down to the line starting with "ro quiet splash" and change it to "rw init=/bin/bash".',
+            '3. Press "Ctrl + X" to boot into the command-line interface.',
+            '4. Once in the CLI, type "passwd" to enter a new root password.',
+            '5. After setting the new password, run "exec /sbin/init" to proceed with the boot.'
+        ],
+        date: '2024-09-07',
+        time: '2:30 PM'
+    },
+    {
+        title: 'Linux Init Commands',
+        image: linux,
+        description: 'Explanation of init commands for different system states.',
+        additionalPoints: [
+            'init 0 - Shut down the system',
+            'init 6 - Restart the system',
+            'init 1 - Single-user mode (maintenance mode)',
+            'init 2 - Multi-user mode without networking',
+            'init 3 - Multi-user mode with networking',
+            'init 4 - Unused/Customizable mode',
+            'init 5 - Multi-user mode with graphical interface'
+        ],
+        date: '2024-09-08',
+        time: '12:30 PM'
+    },
 ];
 
 export default ShortlyData;
