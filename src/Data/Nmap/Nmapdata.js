@@ -671,7 +671,7 @@ const mainCategories = [
                 codeExamples: [
                     {
                         code: "nmap -p80 --script=http-waf-detect.nse 192.168.1.1",
-                        description:`Uses the 'http-waf-detect.nse' script to detect the presence of a Web Application Firewall (WAF) on port 80 of '192.168.1.1'. If a WAF is detected, it will show a message indicating the presence of a WAF. <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">http-waf-detect:</span>`
+                        description: `Uses the 'http-waf-detect.nse' script to detect the presence of a Web Application Firewall (WAF) on port 80 of '192.168.1.1'. If a WAF is detected, it will show a message indicating the presence of a WAF. <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">http-waf-detect:</span>`
                     }
                 ],
                 additionalPointstitle: [],
@@ -738,7 +738,7 @@ const mainCategories = [
                     {
                         code: `sudo docker run -d --name webmap -h webmap -p 8000:8000 -v /tmp/webmap:/opt/xml reborntc/webmap`,
                         description: 'Runs the Webmap container. After execution, wait for the download to complete. Verify successful download by running <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">sudo docker images</span> and ensure the Webmap image is listed.'
-                    },                    
+                    },
                     {
                         code: 'sudo docker ps -a',
                         description: 'Displays all Docker containers, including their status. Check for a container with <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">0000:8000</span>. Alternatively, you can access Webmap in a browser at <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">127.0.0.1:8000</span> or <span class="bg-gray-200 pl-2 pr-2 rounded-md text-purple-600">eth0IP:8000</span>.'
@@ -754,9 +754,9 @@ const mainCategories = [
                 links: [
                     'https://github.com/SabyasachiRana/WebMap.git'
                 ]
-            },                      
+            },
             {
-                title:'Nmap Scanning and Generating a Report',
+                title: 'Nmap Scanning and Generating a Report',
                 description: 'Techniques for scanning with Nmap and generating detailed reports.',
                 codeExamples: [
                     {
@@ -770,145 +770,62 @@ const mainCategories = [
                     '2. Navigate to the <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File System > temp </span>folder. Right-click the folder, open the terminal, and use <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">sudo su</span> to gain superuser privileges. Then, move the XML file to the Webmap folder using the command: <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600" >mv web.xmlfile-path  /tmp/webmap </span>.',
                     '3. Open Webmap and You can see the file.',
                     '4. Explore the results in Webmap and practice analyzing the data.'
-                    ],
-                    // also do  <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File > Import > Open File</span> and select the xml file.
+                ],
+                // also do  <span class="bg-gray-200 pl-2 pr-2 rounded text-purple-600">File > Import > Open File</span> and select the xml file.
                 images: [],
                 links: ['https://github.com/SabyasachiRana/WebMap.git']
-            }            
+            }
         ]
     },
 
-    // {
-    //     title: 'Service and Protocol Enumeration',
-    //     subcategories: [
-    //         {
-    //             title: 'FTP Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting FTP services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'SSH Enumeration and Exploitation Using msfconsole and Hydra',
-    //             description: 'Using msfconsole and Hydra for SSH enumeration and exploitation.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Telnet Enumeration and Exploitation',
-    //             description: 'Enumeration and exploitation techniques for Telnet services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'SMTP Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting SMTP services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Port 80 Enumeration and Exploitation',
-    //             description: 'Enumeration and exploitation techniques for services running on port 80.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'NetBIOS Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting NetBIOS services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Rexec Enumeration and Exploitation',
-    //             description: 'Enumeration and exploitation of Rexec services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Java RMI Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting Java RMI services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'MySQL Enumeration and Exploitation',
-    //             description: 'Enumerating and exploiting MySQL services and databases.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'PostgreSQL Enumeration and Exploitation',
-    //             description: 'Enumeration and exploitation of PostgreSQL services and databases.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'VNC Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting VNC services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'X11 Enumeration and Exploitation',
-    //             description: 'Enumeration and exploitation of X11 services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Apache Tomcat Enumeration and Exploitation',
-    //             description: 'Techniques for enumerating and exploiting Apache Tomcat services.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         },
-    //         {
-    //             title: 'Exploiting Ruby DRB Vulnerability',
-    //             description: 'Exploiting the Ruby DRB (Distributed Ruby) vulnerability.',
-    //             codeExamples: [],
-    //             additionalPointstitle: [],
-    //             additionalPoints: [],
-    //             images: [],
-    //             links: []
-    //         }
-    //     ]
-    // },
+    {
+        title: "Nmap Scanning Code",
+        subcategories: [
+            {
+                title: "Nmap Code",
+                description: "Essential Nmap scan commands for detailed target information.",
+                codeExamples: [
+                    {
+                        code: "whois ip | traceroute ip | nmap -sP  ip",
+                        description: "Get detailed whois information, route the IP through multiple hops, and perform a basic Nmap scan to identify open ports."
+                    },
+                    {
+                        code: "nmap -T4 -A -v [target]",
+                        description: "A fast, aggressive scan with OS detection, version detection, script scanning, and traceroute. This is the go-to scan for detailed information."
+                    },
+                    {
+                        code: "nmap -sS -sV -p- [target]",
+                        description: "Perform a SYN scan, detect service versions, and scan all 65535 ports. Ideal for identifying open ports and the services running on them."
+                    },
+                    {
+                        code: "nmap -O --osscan-guess [target]",
+                        description: "OS detection with guessing enabled for better accuracy. It tries to determine the operating system of the target."
+                    },
+                    {
+                        code: "nmap --script vuln [target]",
+                        description: "Run vulnerability detection scripts on the target to check for known vulnerabilities."
+                    },
+                    {
+                        code: "nmap -Pn -T4 [target]",
+                        description: "A faster scan that skips ping and directly checks for open ports and services. Use this when ICMP ping is blocked."
+                    }
+                ],
+                additionalPointsTitle: [
+                    "Best Scanning Practices",
+                    "Analyzing Results",
+                    "Ethical Scanning"
+                ],
+                additionalPoints: [
+                    "For the best results, start with aggressive scanning (`-A`) and then move to specific checks if needed.",
+                    "Check the version detection output carefully to identify outdated or vulnerable services.",
+                    "Always ensure that you have permission to scan the target. Unauthorized scanning can lead to legal issues."
+                ],
+                "images": [],
+                "links": []
+            }
+        ]
+    }
+
 
 
     // {
