@@ -29,7 +29,7 @@ const Footer = () => {
               Discover SmartLearning with KPH
             </Link>
             <p className="text-gray-400 mt-2">
-              Unlock your potential with expert-guided tutorials on network scanning, cybersecurity, and beyond.
+              Unlock your potential with expert-guided tutorials on network scanning, cybersecurity,<a href='https://smartassignment.netlify.app/' className='hover:text-gray-300'>Assignments</a> and beyond.
             </p>
           </div>
 
