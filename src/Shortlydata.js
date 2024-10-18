@@ -396,6 +396,44 @@ const ShortlyData = [
         date: '2024-09-08',
         time: '12:30 PM'
     },
+    {
+        title: 'Packet Crafting in Networking',
+        image: 'https://www.valencynetworks.com/images/pktcraft2.png',
+        description: 'Packet crafting is the process of manually creating or manipulating network packets to test and analyze network devices or protocols for vulnerabilities. It helps in penetration testing and diagnosing network issues.',
+        additionalPoints: [
+            'Packet Assembly: Creating packets to target network vulnerabilities.',
+            'Packet Editing: Modifying captured packets for better information extraction.',
+            'Packet Replay: Sending crafted packets to exploit network and gather data.',
+            'Packet Decoding: Analyzing network traffic and packet details.'
+        ],
+        date: '2024-09-16',
+        time: '12:00 PM'
+    },
+    {
+        title: 'Port Scanning',
+        image: 'https://www.paloaltonetworks.com/content/dam/pan/en_US/images/cyberpedia/port-scanning.png',
+        description: 'Port scanning is the process of identifying open ports on a network to determine which are active and could be vulnerable. It involves sending packets to specific ports and analyzing responses to assess network security.',
+        additionalPoints: [
+            '**Host Discovery:** Identifying active hosts and mapping IP addresses before port scanning.',
+            '**Open Ports:** Indicate that the port is accepting connections and may be a target for unauthorized access.',
+            '**Closed Ports:** Show that the port is not actively listening but the host is reachable. Monitoring is needed to avoid future vulnerabilities.',
+            '**Filtered Ports:** Requests are blocked or filtered by a firewall, preventing further information from being gathered.'
+        ],
+        date: '2024-09-16',
+        time: '12:30 PM'
+    },
+
+    // {
+    //     title: '',
+    //     image: '',
+    //     description: '',
+    //     additionalPoints: [
+    //         '',
+    //         '',
+    //     ],
+    //     date: '',
+    //     time: ''
+    // },
 ];
 
 export default ShortlyData;

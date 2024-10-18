@@ -71,7 +71,7 @@ const Footer = () => {
 
         <div className="border-t border-white pt-4 text-center">
           <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} SmartLearning With KPH. All rights reserved.
+            &copy; {new Date().getFullYear()} SmartLearning With <a href="/Adminpage" className="">KPH.</a> All rights reserved.
           </p>
         </div>
       </div>

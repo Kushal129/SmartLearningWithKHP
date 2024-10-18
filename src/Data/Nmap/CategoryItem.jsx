@@ -8,7 +8,7 @@ const CategoryItem = ({ title, subcategories, isOpen, onClick }) => {
   const handleSubcategoryClick = (index) => {
     setSelectedSubcategory(selectedSubcategory === index ? null : index);
   };
-
+2
   return (
     <div className="mb-4">
       <div
