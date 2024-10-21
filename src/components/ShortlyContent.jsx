@@ -22,6 +22,15 @@ const AllShortlyContent = () => {
     setSelectedImage(null);
   };
 
+  const renderAdditionalPoints = (points) => {
+    return points.map((point, i) => {
+      const boldText = point.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      return (
+        <li key={i} dangerouslySetInnerHTML={{ __html: boldText }} />
+      );
+    });
+  };
+
   return (
     <div className="container mx-auto m-3">
       <h2 className="text-2xl font-bold text-center mb-4">All Cybersecurity Shortly Content</h2>
@@ -56,15 +65,9 @@ const AllShortlyContent = () => {
               <p className="text-gray-600 mb-4">{item.description}</p>
               {item.additionalPoints && item.additionalPoints.length > 0 && (
                 <ul className="list-disc list-inside text-gray-600">
-                  {item.additionalPoints.map((point, i) => (
-                    <li key={i}>
-                      {console.log(point)}  {/* Debugging */}
-                      {point}
-                    </li>
-                  ))}
+                  {renderAdditionalPoints(item.additionalPoints)}
                 </ul>
               )}
-
             </div>
           ))
         ) : (

@@ -1,4 +1,6 @@
 import linux from '../public/Linux.png';
+import SAvsVAPT from '../src/SAvsVAPT.svg';
+
 const ShortlyData = [
     {
         title: 'The Importance of Network Security',
@@ -91,8 +93,12 @@ const ShortlyData = [
     {
         title: 'Steps in Sending Data Over the Internet',
         image: 'https://img.freepik.com/premium-vector/technology-sending-data-files-internet-network-sending-files-via-email-system_111088-507.jpg',
-        description: 'During the process of sending data over the Internet, the steps occur in the following order: 1. **DNS Resolution** - Resolving the domain name to an IP address. 2. **Routing** - Determining the path the data will take through the network. 3. **Data Transmission** - Sending the actual data to the destination.',
-        additionalPoints: [],
+        description: 'During the process of sending data over the Internet, the steps occur in the following order: ',
+        additionalPoints: [
+            '1. **DNS Resolution** - Resolving the domain name to an IP address. ',
+            '2. **Routing** - Determining the path the data will take through the network.',
+            '3. **Data Transmission** - Sending the actual data to the destination.',
+        ],
         date: '2024-08-19',
         time: '4:00 PM'
     },
@@ -107,9 +113,12 @@ const ShortlyData = [
     {
         title: 'Regional Internet Registries (RIRs)',
         image: 'https://www.nro.net/wp-content/uploads/RIR-Map-Website-1024x576.jpg',
-        description: 'Regional Internet Registries (RIRs) manage the allocation and registration of IP addresses within their respective regions. Examples of RIRs include **ARIN** (American Registry for Internet Numbers) and **RIPE NCC** (Réseaux IP Européens Network Coordination Centre).',
+        description: 'Regional Internet Registries (RIRs) manage the allocation and registration of IP addresses within their respective regions. Examples of RIRs include : ',
         date: '2024-08-19',
-        additionalPoints: [],
+        additionalPoints: [
+            '**ARIN** (American Registry for Internet Numbers)',
+            '**RIPE NCC** (Réseaux IP Européens Network Coordination Centre).',
+        ],
         time: '4:00 PM'
     },
     {
@@ -211,8 +220,12 @@ const ShortlyData = [
     {
         title: 'VPN Types Ranked by Security',
         image: 'https://yourvpnservice.com/wp-content/uploads/2018/03/what-is-vpn.png',
-        description: 'Here is a list of common VPN types ranked from least secure to most secure: 1. **PPTP (Point-to-Point Tunneling Protocol)**: Least secure due to known vulnerabilities and outdated encryption methods. 2. **L2TP/IPsec (Layer 2 Tunneling Protocol with IPsec)**: More secure than PPTP as it combines L2TP with IPsec for better encryption, but still not as robust as OpenVPN. 3. **OpenVPN**: Most secure, offering strong encryption and high configurability, making it the best choice for secure communications.',
-        additionalPoints: [],
+        description: 'Here is a list of common VPN types ranked from least secure to most secure: ',
+        additionalPoints: [
+            '1. **PPTP (Point-to-Point Tunneling Protocol)**: Least secure due to known vulnerabilities and outdated encryption methods.',
+            '2. **L2TP/IPsec (Layer 2 Tunneling Protocol with IPsec)**: More secure than PPTP as it combines L2TP with IPsec for better encryption, but still not as robust as OpenVPN.',
+            '3. **OpenVPN**: Most secure, offering strong encryption and high configurability, making it the best choice for secure communications.',
+        ],
         date: '2024-08-23',
         time: '09:35 AM'
     },
@@ -227,7 +240,7 @@ const ShortlyData = [
     {
         title: 'Firewall Protocols & Its Types',
         image: 'https://static.javatpoint.com/tutorial/firewall/images/types-of-firewall.png',
-        description: 'Firewall protocols operate at different layers of the OSI model: \n\n- [ Link Layer : Defines the media access control (MAC) method and provides minor error-detection facilities. ] \n-  [ Network Layer: Specifies whole-network addressing schemes, routing, and network control schemes. ] \n- [ Transport Layer: Uses IP as the network protocol for transport protocols such as TCP, UDP, and ICMP. ]',
+        description: 'Firewall protocols operate at different layers of the OSI model: - [ Link Layer : Defines the media access control (MAC) method and provides minor error-detection facilities. ] -  [ Network Layer: Specifies whole-network addressing schemes, routing, and network control schemes. ] - [ Transport Layer: Uses IP as the network protocol for transport protocols such as TCP, UDP, and ICMP. ]',
         additionalPoints: [],
         date: '2024-08-23',
         time: '12:00 PM'
@@ -243,16 +256,25 @@ const ShortlyData = [
     {
         title: 'Types of Detection in IDS/IPS',
         image: 'https://i.ytimg.com/vi/cGIgJOICpX0/maxresdefault.jpg',
-        description: 'IDS and IPS use two main types of detection: \n\n- **Signature-based Detection**: Notifies administrators of predefined signatures associated with known attacks. \n- **Anomaly-based Detection**: Monitors behavior patterns to detect new or unknown threats, making it more effective than signature-based systems for detecting novel attacks.',
-        additionalPoints: [],
+        description: 'IDS and IPS use two main types of detection: ',
+        additionalPoints: [
+            '**Signature-based Detection**: Notifies administrators of predefined signatures associated with known attacks.',
+            '**Anomaly-based Detection**: Monitors behavior patterns to detect new or unknown threats, making it more effective than signature-based systems for detecting novel attacks.',
+        ],
         date: '2024-08-23',
         time: '12:15 PM'
     },
     {
         title: 'Types of IDS',
         image: 'https://st2.depositphotos.com/2547605/44074/v/450/depositphotos_440748738-stock-illustration-ids-intrusion-detection-system-acronym.jpg',
-        description: 'IDS types include: \n\n- **Network Intrusion Detection Systems (NIDS)**: Monitors traffic through sensors placed on the network. \n- **Host Intrusion Detection Systems (HIDS)**: Monitors traffic on individual devices for more control. \n- **Protocol-based Intrusion Detection Systems (PIDS)**: Monitors traffic for specific application protocols, securing server communications. \n- **Application Protocol-based Intrusion Detection Systems (APIDS)**: Monitors traffic across multiple servers, focusing on application protocols. \n- **Hybrid Intrusion Detection Systems**: Combines features of multiple IDS types for comprehensive monitoring.',
-        additionalPoints: [],
+        description: 'IDS types include: ',
+        additionalPoints: [
+            '**Network Intrusion Detection Systems (NIDS)**: Monitors traffic through sensors placed on the network.',
+            '**Host Intrusion Detection Systems (HIDS)**: Monitors traffic on individual devices for more control.',
+            '**Protocol-based Intrusion Detection Systems (PIDS)**: Monitors traffic for specific application protocols, securing server communications.',
+            '**Application Protocol-based Intrusion Detection Systems (APIDS)**: Monitors traffic across multiple servers, focusing on application protocols.',
+            '**Hybrid Intrusion Detection Systems**: Combines features of multiple IDS types for comprehensive monitoring.',
+        ],
         date: '2024-08-23',
         time: '12:05 PM'
     },
@@ -267,16 +289,25 @@ const ShortlyData = [
     {
         title: 'Steps in Network Packet Analysis',
         image: 'https://api.contentstack.io/v2/uploads/59837abdc4a37728602aa589/download?uid=blt7ec7626d9925ead1',
-        description: 'The three common steps in network packet analysis are: \n\n- **Collect**: Choose a network interface to listen on and capture raw data. \n- **Convert**: Transform the binary data into a human-readable format. \n- **Analyze**: Examine the data to understand protocol details and network activity. This process helps in identifying unusual activity and troubleshooting network issues.',
-        additionalPoints: [],
+        description: 'The three common steps in network packet analysis are: ',
+        additionalPoints: [
+            '**Collect**: Choose a network interface to listen on and capture raw data. ',
+            '**Convert**: Transform the binary data into a human-readable format.',
+            '**Analyze**: Examine the data to understand protocol details and network activity.',
+            'This process helps in identifying unusual activity and troubleshooting network issues.',
+        ],
         date: '2024-08-23',
         time: '12:35 PM'
     },
     {
         title: 'Applications of Network Packet Analysis',
         image: 'https://images.contentstack.io/v3/assets/blt28ff6c4a2cf43126/blt9ea70f86d8376c8a/6500fd206c15897946a30292/Packet_Analyzer_-_Network_Analysis_&_Scanning_Tool_0_Features_Array_Item_-_features_item_image.webp?auto=webp&disable=upscale&width=1920&quality=75',
-        description: 'Network packet analysis can be used for various purposes including: \n\n- **Forensic Investigations**: To find evidence of nefarious online behavior, data breaches, and malware infections. \n- **Performance Troubleshooting**: To diagnose issues like packet loss or network latency. \n- **Security Monitoring**: To detect unauthorized access and intrusion attempts. \n- **Reconstructing Data**: To reconstruct files and documents sent over the network.',
-        additionalPoints: [],
+        description: 'Network packet analysis can be used for various purposes including:  - **Security Monitoring**: To detect unauthorized access and intrusion attempts.',
+        additionalPoints: [
+            '**Forensic Investigations**: To find evidence of nefarious online behavior, data breaches, and malware infections. ',
+            '**Performance Troubleshooting**: To diagnose issues like packet loss or network latency.',
+            '**Reconstructing Data**: To reconstruct files and documents sent over the network.',
+        ],
         date: '2024-08-23',
         time: '12:40 PM'
     },
@@ -421,6 +452,63 @@ const ShortlyData = [
         ],
         date: '2024-09-16',
         time: '12:30 PM'
+    },
+    {
+        title: 'What is a Security Audit?',
+        image: 'https://www.scnsoft.com/cybersecurity/security-audit/cover-pic-security-audit.svg',
+        description: 'A security audit checks how safe an organization’s data and systems are. It ensures everything follows industry rules and best practices.',
+        additionalPoints: [
+            'Looks at physical security, software updates, and network safety.',
+            'Checks how employees handle sensitive data and if policies are in place.',
+            'Follows standards like HIPAA, ISO, or NIST for extra safety.',
+            'Reports any risks, breaches, or improvements needed to stay secure.',
+            'Helps in planning how to reduce risks and stay compliant.'
+        ],
+        date: '2024-10-20',
+        time: '10:00 AM'
+    },
+    {
+        title: 'What is VAPT?',
+        image: 'https://pixelstreet.in/blog/wp-content/uploads/2023/01/VAPT.png',
+        description: 'VAPT stands for Vulnerability Assessment and Penetration Testing – a process to find and fix security weaknesses in systems.',
+        additionalPoints: [
+            '**Vulnerability Assessment**: Identifies security flaws and assigns severity levels.',
+            '**Penetration Testing**: Simulates real-world attacks to test system defenses.',
+            'VAPT combines both methods for a deeper, more thorough security check.',
+            'It may involve automated tools, manual techniques, or red team operations.',
+            'The goal is to discover risks early and improve the organization’s cyber defenses.'
+        ],
+        date: '2024-10-20',
+        time: '10:15 AM'
+    },
+    {
+        title: 'Security Audit vs VAPT',
+        image: SAvsVAPT,
+        description: 'A security audit checks the overall security strategy, while VAPT focuses on identifying and testing vulnerabilities.',
+        additionalPoints: [
+            '**Security Audit**: Reviews firewall settings, antivirus, passwords, and access controls to check if policies are followed.',
+            '**Penetration Testing**: Ethical hackers simulate attacks to find security gaps.',
+            '**Vulnerability Assessment**: Scans systems to detect known vulnerabilities.',
+            'Security audits are broader and include governance, while VAPT targets specific weaknesses.',
+            'Together, these methods help build a strong cybersecurity defense.'
+        ],
+        date: '2024-10-20',
+        time: '10:30 AM'
+    },
+    {
+        title: 'Cybersecurity Standards and Compliance',
+        image: 'https://www.riskandresiliencehub.com/wp-content/uploads/2023/04/shutterstock_414114655.jpg',
+        description: 'Cybersecurity standards help organizations protect data, meet legal requirements, and build trust.',
+        additionalPoints: [
+            '**ISO 27001**: Global standard for managing information security.',
+            '**HIPAA**: Ensures patient data protection in healthcare systems.',
+            '**NIST Framework**: Guides organizations to manage cybersecurity risks effectively.',
+            '**PCI DSS**: Secures credit card transactions and reduces fraud risks.',
+            '**GDPR**: Gives individuals control over their personal data usage.',
+            '**SOC 2**: Manages customer data based on trust principles like security and privacy.'
+        ],
+        date: '2024-10-20',
+        time: '10:45 AM'
     },
 
     // {
