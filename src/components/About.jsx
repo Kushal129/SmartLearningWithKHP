@@ -7,35 +7,31 @@ const AboutUsPage = () => {
             <div className="container mx-auto max-w-5xl bg-white rounded-lg shadow-lg p-8">
                 <h1 className="text-4xl text-center font-extrabold text-purple-900 mb-6">About Us</h1>
                 <p className="text-lg text-gray-700 mb-6">
-                    Welcome to our company! We specialize in delivering comprehensive cybersecurity education
-                    designed to take you from a beginner to a master in the field. Our team of seasoned
-                    experts is dedicated to providing in-depth, yet easy-to-understand content that empowers you
-                    to navigate the complex world of cybersecurity with confidence. Whether you're just starting out or
-                    looking to deepen your expertise, we offer a structured learning path that covers everything from
-                    fundamental concepts to advanced techniques. Our mission is to equip you with the knowledge and skills
-                    needed to protect and secure digital environments effectively, ensuring that you stay ahead in this ever-evolving field.
+                    Welcome to SmartLearning with KHP! We're dedicated to providing top-notch cybersecurity education,
+                    guiding you from novice to expert. Our team of professionals offers clear, comprehensive content
+                    to help you master the intricacies of cybersecurity. Whether you're starting out or advancing your skills,
+                    our structured curriculum covers essential concepts and cutting-edge techniques. Our goal is to empower you
+                    with the knowledge and practical skills needed to excel in the rapidly evolving field of cybersecurity.
                 </p>
 
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6">
                     <div className="w-full md:w-1/2 p-4">
                         <h2 className="text-3xl font-semibold text-purple-900 mb-4">Our Vision</h2>
                         <p className="text-gray-600">
-                            Our vision is to lead the cybersecurity education sector by continuously evolving our content and methods to meet
-                            the dynamic needs of our learners. We are committed to fostering a culture of innovation and excellence,
-                            ensuring that our resources and teachings stay at the cutting edge of the industry. By embracing new technologies and
-                            approaches, we aim to deliver exceptional educational experiences that empower individuals and organizations to achieve
-                            unparalleled cybersecurity proficiency and resilience.
+                            We aim to be the leading innovator in cybersecurity education, constantly adapting our content
+                            and methods to meet industry demands. By leveraging cutting-edge technologies and approaches,
+                            we strive to provide unparalleled learning experiences that equip individuals and organizations
+                            with the tools to achieve cybersecurity excellence and resilience.
                         </p>
                     </div>
 
                     <div className="w-full md:w-1/2 p-4">
                         <h2 className="text-3xl font-semibold text-purple-900 mb-4">Our Mission</h2>
                         <p className="text-gray-600">
-                            Our mission is to deliver comprehensive and cutting-edge cybersecurity education that empowers individuals and 
-                            organizations to navigate and excel in the digital landscape. We are committed to providing clear, actionable 
-                            insights and practical solutions, fostering a deep understanding of cybersecurity from foundational concepts to 
-                            advanced techniques. Our goal is to build lasting relationships through exceptional support and by creating a learning 
-                            environment where expertise meets excellence.
+                            Our mission is to deliver accessible, high-quality cybersecurity education that empowers learners
+                            to thrive in the digital world. We provide clear, practical insights and solutions, fostering a
+                            comprehensive understanding of cybersecurity principles. We're committed to building strong
+                            relationships through exceptional support and creating an environment where expertise meets excellence.
                         </p>
                     </div>
                 </div>
@@ -48,7 +44,7 @@ const AboutUsPage = () => {
                             <img src={myimg} alt="CEO | Kushal Pipaliya" className="w-full h-48 object-cover" />
                             <div className="p-4">
                                 <h3 className="text-md font-semibold text-purple-900">Kushal Pipaliya</h3>
-                                <p className="text-gray-600 text-[9px]">CEO | BSc IT, Cybersecurity Certified</p>
+                                <p className="text-gray-600 text-[9px]">CEO | Cybersecurity Expert</p>
                             </div>
                         </div>
                     </div>

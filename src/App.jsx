@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './components/Admin/Auth/AuthContext';
@@ -18,8 +18,23 @@ import BackToTop from './components/BackToTop';
 import LoginPage from './components/Admin/Auth/LoginPage';
 import AdminPage from './components/Admin/AdminPanel';
 import ProtectedRoute from './components/Admin/Auth/ProtectedRoute';
+import Loader from './components/Loader';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <AuthProvider>
       <Router>
@@ -29,6 +44,7 @@ function App() {
             <Breadcrumb />
             <Toaster />
             <Routes>
+              <Route path='/Loader' element={<Loader />} />
               <Route path="/" element={<IndexPage />} />
               <Route path='/LoginPage' element={<LoginPage />} />
               <Route path="/About" element={<AboutUsPage />} />

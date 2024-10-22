@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import shortlyData from '../Shortlydata';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaCalendarAlt, FaClock } from 'react-icons/fa';
 
 const AllShortlyContent = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [viewMode, setViewMode] = useState('grid');
 
   const sortedData = shortlyData.sort((a, b) =>
     new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time)
@@ -35,8 +36,8 @@ const AllShortlyContent = () => {
     <div className="container mx-auto m-3">
       <h2 className="text-2xl font-bold text-center mb-4">All Cybersecurity Shortly Content</h2>
 
-      <div className="mb-4 flex justify-center">
-        <div className="relative w-full max-w-md">
+      <div className="mb-4 flex justify-center items-center">
+        <div className="relative w-full max-w-md mr-4">
           <input
             type="text"
             placeholder="Search by title..."
@@ -49,31 +50,81 @@ const AllShortlyContent = () => {
             <FaSearch className="text-gray-500" />
           </div>
         </div>
+        <div className="flex">
+          <button
+            className={`px-4 py-2 rounded-l-lg ${viewMode === 'grid' ? 'bg-purple-500 text-white' : 'bg-gray-200'}`}
+            onClick={() => setViewMode('grid')}
+          >
+            Grid
+          </button>
+          <button
+            className={`px-4 py-2 rounded-r-lg ${viewMode === 'list' ? 'bg-purple-500 text-white' : 'bg-gray-200'}`}
+            onClick={() => setViewMode('list')}
+          >
+            List
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {filteredData.length > 0 ? (
-          filteredData.map((item, index) => (
-            <div key={index} className="bg-white p-4 rounded-lg shadow-lg">
-              <img
-                src={item.image}
-                alt={`Preview of ${item.title}`}
-                className="w-full h-40 object-cover rounded-lg mb-4 cursor-pointer"
-                onClick={() => handleImageClick(item)}
-              />
-              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-gray-600 mb-4">{item.description}</p>
-              {item.additionalPoints && item.additionalPoints.length > 0 && (
-                <ul className="list-disc list-inside text-gray-600">
-                  {renderAdditionalPoints(item.additionalPoints)}
-                </ul>
-              )}
-            </div>
-          ))
-        ) : (
-          <p className="col-span-full text-center text-gray-500">No results found</p>
-        )}
-      </div>
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {filteredData.length > 0 ? (
+            filteredData.map((item, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                <img
+                  src={item.image}
+                  alt={`Preview of ${item.title}`}
+                  className="w-full h-40 object-cover rounded-lg mb-4 cursor-pointer"
+                  onClick={() => handleImageClick(item)}
+                />
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600 mb-4">{item.description}</p>
+                {item.additionalPoints && item.additionalPoints.length > 0 && (
+                  <ul className="list-disc list-inside text-gray-600">
+                    {renderAdditionalPoints(item.additionalPoints)}
+                  </ul>
+                )}
+                <div className="mt-4 flex justify-between text-sm text-gray-500">
+                  <span><FaCalendarAlt className="inline mr-1" />{item.date}</span>
+                  <span><FaClock className="inline mr-1" />{item.time}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-500">No results found</p>
+          )}
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {filteredData.length > 0 ? (
+            filteredData.map((item, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-lg flex">
+                <img
+                  src={item.image}
+                  alt={`Preview of ${item.title}`}
+                  className="w-48 h-48 object-cover rounded-lg mr-4 cursor-pointer"
+                  onClick={() => handleImageClick(item)}
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-gray-600 mb-4">{item.description}</p>
+                  {item.additionalPoints && item.additionalPoints.length > 0 && (
+                    <ul className="list-disc list-inside text-gray-600">
+                      {renderAdditionalPoints(item.additionalPoints)}
+                    </ul>
+                  )}
+                  <div className="mt-4 flex justify-end text-sm text-gray-500">
+                    <span className="mr-4"><FaCalendarAlt className="inline mr-1" />{item.date}</span>
+                    <span><FaClock className="inline mr-1" />{item.time}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No results found</p>
+          )}
+        </div>
+      )}
 
       {/* Modal */}
       {selectedImage && (
