@@ -99,8 +99,8 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
     push(ref(database, 'securityAnalyst'), dataToSubmit)
       .then(() => {
         toast.success('Content saved successfully!', {
-          duration: 3000,
-          position: 'top-center',
+          duration: 4000,
+          position: 'bottom-right',
         });
         setFormData({
           topicName: '',
@@ -119,8 +119,8 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
       })
       .catch((error) => {
         toast.error('Error saving content: ' + error.message, {
-          duration: 3000,
-          position: 'top-center',
+          duration: 4000,
+          position: 'bottom-right',
         });
       });
   };
@@ -134,15 +134,15 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
           setShowFirebaseFile(true);
         } else {
           toast.error('No data available', {
-            duration: 3000,
-            position: 'top-center',
+            duration: 4000,
+            position: 'bottom-right',
           });
         }
       })
       .catch((error) => {
         toast.error('Error fetching data: ' + error.message, {
-          duration: 3000,
-          position: 'top-center',
+          duration: 4000,
+          position: 'bottom-right',
         });
       });
   };
@@ -154,20 +154,20 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
         set(ref(database, 'securityAnalyst'), parsedData)
           .then(() => {
             toast.success('Changes saved successfully!', {
-              duration: 3000,
+              duration: 4000,
               position: 'bottom-right',
             });
             setShowSaveButton(false);
           })
           .catch((error) => {
             toast.error('Error saving changes: ' + error.message, {
-              duration: 3000,
+              duration: 4000,
               position: 'bottom-right',
             });
           });
       } catch (error) {
         toast.error('Invalid JSON format. Please check your input.', {
-          duration: 3000,
+          duration: 4000,
           position: 'bottom-right',
         });
       }
