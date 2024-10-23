@@ -35,6 +35,50 @@ const SecurityAnalyst = () => {
     }));
   };
 
+  const renderTopicContent = (topicContent) => {
+    const sections = topicContent.split('###').filter(section => section.trim() !== '');
+    return sections.map((section, sectionIndex) => {
+      const [title, ...content] = section.split('\n').filter(line => line.trim() !== '');
+      return (
+        <div key={sectionIndex} className="mb-6">
+          <h3 className="text-xl font-semibold mb-3 text-purple-700">{title.trim()}</h3>
+          <ul className="list-disc pl-6 space-y-2">
+            {content.map((item, itemIndex) => (
+              <li key={itemIndex} className="text-gray-700">
+                {renderContentItem(item)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    });
+  };
+
+  const renderContentItem = (item) => {
+    // Remove numbering and bullet points
+    const cleanedItem = item.replace(/^\d+\.\s|\-\s/, '');
+    
+    // Split the item into label and content
+    const [label, ...contentParts] = cleanedItem.split(':');
+    const content = contentParts.join(':').trim();
+
+    if (content) {
+      return (
+        <>
+          <strong>{label}:</strong> {renderFormattedContent(content)}
+        </>
+      );
+    } else {
+      return renderFormattedContent(label);
+    }
+  };
+
+  const renderFormattedContent = (content) => {
+    return content.split('**').map((part, index) => 
+      index % 2 === 0 ? part : <strong key={index}>{part}</strong>
+    );
+  };
+
   if (content.length === 0) return (
     <div className="flex justify-center items-center h-screen">
       <div className="text-center">
@@ -133,21 +177,7 @@ const SecurityAnalyst = () => {
                 >
                   <h2 className="text-2xl font-semibold mb-4 text-purple-700">Topic Content</h2>
                   <div className="text-gray-700 space-y-6">
-                    {item.topicContent.split('\n\n').map((section, index) => {
-                      const [title, ...content] = section.split('\n');
-                      return (
-                        <div key={index} className="mb-4">
-                          <p className="text-sm font-semibold mb-2">{title.replace('###', '').trim()}</p>
-                          <ul className="list-disc pl-6 space-y-2">
-                            {content.map((item, itemIndex) => (
-                              <li key={itemIndex} className="text-gray-700">
-                                {item.replace(/^\d+\.\s|\-\s/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      );
-                    })}
+                    {renderTopicContent(item.topicContent)}
                   </div>
                 </motion.div>
 

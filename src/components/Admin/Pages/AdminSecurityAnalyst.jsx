@@ -174,6 +174,24 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
     }
   };
 
+  const handleFormatJSON = () => {
+    try {
+      const parsedData = JSON.parse(firebaseFileContent);
+      const formattedContent = JSON.stringify(parsedData, null, 2);
+      setFirebaseFileContent(formattedContent);
+      setShowSaveButton(true);
+      toast.success('JSON formatted successfully!', {
+        duration: 2000,
+        position: 'bottom-right',
+      });
+    } catch (error) {
+      toast.error('Invalid JSON format. Please check your input.', {
+        duration: 4000,
+        position: 'bottom-right',
+      });
+    }
+  };
+
   return (
     <div className={`max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
       <Toaster />
@@ -245,7 +263,7 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
           required
           darkMode={darkMode}
         />
-        <InputField
+        <TextAreaField
           label="Topic Content"
           name="topicContent"
           value={formData.topicContent}
@@ -337,6 +355,12 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
                   className={`px-2 py-1 rounded ${darkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                 >
                   Download
+                </button>
+                <button 
+                  onClick={handleFormatJSON}
+                  className={`px-2 py-1 rounded ${darkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                >
+                  Format JSON
                 </button>
               </div>
             </div>
