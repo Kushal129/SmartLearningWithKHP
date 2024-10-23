@@ -1,141 +1,197 @@
-import React, { useState } from 'react';
-import { FaHome, FaPlus, FaSignOutAlt, FaTimes } from 'react-icons/fa';
-import { useAuth } from './Auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import Dashboard from './Pages/Dashboard';
-import AddPage from './Pages/AddPage';
-
-const quotes = [
-    "In business, success is built on resilience and adaptability. 💼",
-    "The greatest risk is not taking any risk at all. ⚠️",
-    "Innovation is the cornerstone of growth in today's competitive landscape. 🚀",
-    "In cybersecurity, every challenge is an opportunity to strengthen defenses. 🔒",
-    "Your network is your net worth—invest in relationships. 🤝",
-    "Hacking is not just about breaking in; it’s about understanding systems. 💻",
-    "Success in business requires a clear vision and unwavering commitment. 🎯",
-    "A proactive mindset is the best protection against threats. 🛡️",
-    "Failure is simply a stepping stone toward achieving your goals. 🏆",
-    "Great leaders inspire others to dream more, learn more, and become more. 🌟",
-    "In the world of cybersecurity, knowledge is power—stay informed. 📚",
-    "The only way to predict the future is to create it. 🔮",
-    "In the realm of business, perseverance can turn dreams into reality. 🌈",
-    "The best hackers are those who think like defenders. 🔍",
-    "Success is not about luck; it’s about preparation meeting opportunity. ✨",
-    "Every problem is a chance to learn and grow; embrace challenges. 🌱",
-    "Your success is determined by your mindset—think big, act bigger. 💪",
-    "The road to success is dotted with many tempting parking spaces. 🛣️",
-    "True strength is not in never falling, but in rising every time we fall. ⛰️",
-    "Discipline is the bridge between goals and accomplishment. 🏗️",
-    "In the digital age, adaptability is the key to survival. 🔑",
-    "Be relentless in the pursuit of what sets your soul on fire. 🔥",
-    "Leaders create more leaders, not followers. 🌟",
-    "Knowledge is the new currency; invest wisely. 💰",
-    "Every expert was once a beginner—start your journey today. 🌍",
-    "In a world full of noise, find your unique voice and amplify it. 📢",
-    "Success is a journey, not a destination; enjoy every step. 🗺️",
-    "To succeed in cybersecurity, think like a hacker and defend like a pro. 💻🛡️",
-    "Opportunities don't just happen; you create them through hard work. 🛠️"
-];
-
-
-
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { RiSunLine, RiMoonLine, RiDashboardLine, RiBookOpenLine, RiLogoutBoxRLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldKeyholeLine, RiMenuFoldLine, RiMenuUnfoldLine, RiCloseLine, RiQuoteText } from 'react-icons/ri';
+import { FaChartBar, FaClipboardList } from 'react-icons/fa';
+import AdminSecurityAnalyst from './Pages/AdminSecurityAnalyst';
+import DashboardContent from './Pages/Dashboard';
+import myimage from '../../../public/my.png';
+import quotes from './Pages/quotes';
+import QuoteModel from './Pages/QuoteModel';
 
 const AdminPanel = () => {
-    const [currentPage, setCurrentPage] = useState('dashboard');
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [showQuoteModal, setShowQuoteModal] = useState(true);
-    const { logout } = useAuth();
-    const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [pagesExpanded, setPagesExpanded] = useState(false);
+  const [activePage, setActivePage] = useState('dashboard');
+  const [time, setTime] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
+  const [currentQuote, setCurrentQuote] = useState('');
+  const [showQuotesModel, setShowQuotesModel] = useState(true);
 
-    const handleLogout = async () => {
-        await logout();
-        toast.success('Logout successful.');
-        navigate('/');
-    };
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-    const closeModal = () => {
-        setShowQuoteModal(false);
-    };
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    document.body.classList.toggle('dark', darkMode);
+  }, [darkMode]);
 
+  useEffect(() => {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    setCurrentQuote(randomQuote);
+    setShowQuotesModel(true);
+    const timer = setTimeout(() => setShowQuotesModel(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
-    return (
-        <div className="flex p-2 h-screen">
-            {/* Sidebar */}
-            <div className={`bg-purple-950 rounded-l-lg text-center items-center text-white transition-all duration-300 ${isSidebarOpen ? 'lg:w-60' : 'w-16'}`}>
-                {isSidebarOpen && (
-                    <button
-                        className="absolute top-[165px] right-2 text-red-300 lg:hidden"
-                        onClick={() => setIsSidebarOpen(false)}
-                    >
-                        <FaTimes size={18} />
-                    </button>
-                )}
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const togglePages = () => setPagesExpanded(!pagesExpanded);
+  const toggleQuotesModel = () => setShowQuotesModel(!showQuotesModel);
 
-                <div className={`p-4 ${isSidebarOpen ? 'block' : 'hidden'}`}>
-                    <h1 className="text-2xl font-bold">Admin Panel</h1>
-                </div>
+  const pageComponents = {
+    dashboard: <DashboardContent darkMode={darkMode} />,
+    securityAnalyst: <AdminSecurityAnalyst darkMode={darkMode} />,
+    // Add other page components here
+  };
 
-                <ul className="mt-4 flex flex-col">
-                    <li
-                        className="flex items-center p-4 hover:bg-purple-900 cursor-pointer transition duration-300"
-                        onClick={() => {
-                            setCurrentPage('dashboard');
-                            setIsSidebarOpen(true);
-                        }}
-                    >
-                        <FaHome className="mr-2" />
-                        <span className={`${isSidebarOpen ? 'block' : 'hidden'}`}>Dashboard</span>
-                    </li>
-
-                    <li
-                        className="flex items-center p-4 hover:bg-purple-900 cursor-pointer transition duration-300"
-                        onClick={() => {
-                            setCurrentPage('addPage');
-                            setIsSidebarOpen(true);
-                        }}
-                    >
-                        <FaPlus className="mr-2" />
-                        <span className={`${isSidebarOpen ? 'block' : 'hidden'}`}>Add Page</span>
-                    </li>
-                </ul>
-
-                <div className="mt-auto mb-4">
-                    <li
-                        className="flex items-center p-4 hover:bg-purple-900 cursor-pointer transition duration-300"
-                        onClick={handleLogout}
-                    >
-                        <FaSignOutAlt className="mr-2" />
-                        <span className={`${isSidebarOpen ? 'block' : 'hidden'}`}>Logout</span>
-                    </li>
-                </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="flex w-full justify-center bg-purple-100 p-4 transition-all duration-300 overflow-auto">
-                {currentPage === 'dashboard' ? <Dashboard /> : <AddPage />}
-            </div>
-
-            {showQuoteModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-85 transition-opacity duration-300">
-                    <div className="bg-gradient-to-r from-purple-950 to-purple-700 p-6 rounded-lg shadow-lg max-w-md w-full transform transition-transform duration-300 scale-100 relative">
-                        {/* Close Button at the Top Right */}
-                        <button
-                            onClick={closeModal}
-                            className="absolute top-2 right-2 text-white hover:text-purple-200 transition duration-300"
-                        >
-                            <FaTimes size={20} />
-                        </button>
-
-                        <h2 className="text-xl font-bold text-white mb-4 text-center">Always Motivated</h2>
-                        <p className="mb-4 text-gray-50 text-center italic">{randomQuote}</p>
-                    </div>
-                </div>
-            )}
-
+  return (
+    <div className={`flex h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+      {/* Sidebar */}
+      <motion.div
+        className={`${sidebarOpen ? 'w-64' : 'w-20'} flex flex-col ${darkMode ? 'bg-gray-800' : 'bg-purple-950'} text-white transition-all duration-300 ease-in-out`}
+        animate={{ width: sidebarOpen ? 256 : 80 }}
+      >
+        
+        <div className="p-4 flex items-center justify-between">
+          <motion.h1 
+            className={`font-bold ${sidebarOpen ? 'text-xl' : 'text-xs'} transition-all duration-300`}
+            animate={{ opacity: sidebarOpen ? 1 : 0 }}
+          >
+            {sidebarOpen ? 'Smart Learning With KHP' : 'SLW-KHP'}
+          </motion.h1>
+          <button 
+            onClick={toggleSidebar} 
+            className="text-white focus:outline-none hover:bg-purple-700 p-2 rounded-full transition-colors duration-200"
+            aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+          >
+            {sidebarOpen ? <RiMenuFoldLine size={20} /> : <RiMenuUnfoldLine size={20} />}
+          </button>
         </div>
-    );
+
+        <hr className="border-spacing-0.5 border-white my-2" />
+        <nav className="flex-1 overflow-y-auto">
+          <ul className="space-y-2 p-2">
+            <SidebarItem icon={RiDashboardLine} text="Dashboard" onClick={() => setActivePage('dashboard')} expanded={sidebarOpen} />
+            <SidebarItem icon={RiBookOpenLine} text="Pages" onClick={togglePages} expanded={sidebarOpen} hasSubmenu>
+              <AnimatePresence>
+                {pagesExpanded && (
+                  <motion.ul
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="ml-4 space-y-2"
+                  >
+                    <SidebarItem icon={RiShieldKeyholeLine} text="Security Analyst" onClick={() => setActivePage('securityAnalyst')} expanded={sidebarOpen} submenuItem />
+                    <SidebarItem icon={FaChartBar} text="Analytics" onClick={() => console.log('Analytics')} expanded={sidebarOpen} submenuItem />
+                    <SidebarItem icon={FaClipboardList} text="Reports" onClick={() => console.log('Reports')} expanded={sidebarOpen} submenuItem />
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </SidebarItem>
+            {/* <SidebarItem icon={RiQuoteText} text="Quotes" onClick={toggleQuotesModel} expanded={sidebarOpen} /> */}
+          </ul>
+        </nav>
+        <div className="p-4">
+          <SidebarItem icon={RiLogoutBoxRLine} text="Logout" onClick={() => console.log('Logout')} expanded={sidebarOpen} />
+        </div>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className={`flex justify-between items-center p-4 ${darkMode ? 'bg-gray-800' : 'bg-purple-950'} shadow-md`}>
+          <div>
+            <p className={`text-2xl font-semibold capitalize ${darkMode ? 'text-white' : 'text-gray-100'}`}>{activePage}</p>
+            {activePage === 'dashboard' && (
+              <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-200'}`}>Welcome, Kushal Pipaliya!</p>
+            )}
+          </div>
+          <div className="flex items-center space-x-4">
+            <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-100'}`}>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</p>
+            <button onClick={toggleDarkMode} className="p-2 rounded-full transition-colors duration-200">
+              {darkMode ? <RiSunLine className="text-yellow-400" size={24} /> : <RiMoonLine className="text-gray-100" size={24} />}
+            </button>
+            <div className="relative">
+              <div className="relative">
+                <img 
+                  src={myimage} 
+                  alt="User" 
+                  className="w-10 h-10 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+                  onClick={() => setShowModal(true)}
+                />
+                {showModal && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className={`w-64 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-xl`}>
+                      <div className="p-4">
+                        <div className="flex justify-end">
+                          <button 
+                            onClick={() => setShowModal(false)}
+                            className={`p-1 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}
+                          >
+                            <RiCloseLine size={20} />
+                          </button>
+                        </div>
+                        <img src={myimage} alt="User" className="w-24 h-26 object-contain rounded-full mx-auto mb-2" />
+                        <h3 className={`text-lg font-semibold text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}>Kushal Pipaliya</h3>
+                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} text-center`}>Web Developer & Security Enthusiast</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full"></span>
+            </div>
+          </div>
+        </header>
+        <main className={`flex-1 overflow-x-hidden overflow-y-auto p-6 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activePage}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              {pageComponents[activePage]}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
+      <QuoteModel 
+        showQuotesModel={showQuotesModel} 
+        toggleQuotesModel={toggleQuotesModel} 
+        darkMode={darkMode} 
+        currentQuote={currentQuote}
+      />
+    </div>
+  );
+};
+
+const SidebarItem = ({ icon: Icon, text, onClick, expanded, hasSubmenu, submenuItem, children }) => {
+  return (
+    <>
+      <button
+        onClick={onClick}
+        className={`flex items-center w-full p-2 rounded-lg ${
+          submenuItem ? 'text-gray-300 hover:text-white' : 'text-white'
+        } hover:bg-purple-800 transition-colors duration-200`}
+      >
+        <Icon className={`${expanded ? 'mr-3' : 'mx-auto'} h-6 w-6`} />
+        {expanded && (
+          <>
+            <span className="flex-1 text-left">{text}</span>
+            {hasSubmenu && (children ? <RiArrowUpSLine /> : <RiArrowDownSLine />)}
+          </>
+        )}
+      </button>
+      {children}
+    </>
+  );
 };
 
 export default AdminPanel;
