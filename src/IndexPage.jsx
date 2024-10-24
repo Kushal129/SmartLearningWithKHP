@@ -8,6 +8,12 @@ import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import { useSwipeable } from 'react-swipeable';
 import { cards } from './Data/Cardsindexdata.js';
+import { getDatabase, ref, get } from "firebase/database";
+import { firebaseConfig } from './components/Admin/firebase';
+import { getApp, initializeApp } from "firebase/app";
+
+const app = getApp() || initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,12 +22,39 @@ const IndexPage = () => {
   const [typewriterComplete, setTypewriterComplete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(4);
+  const [latestContent, setLatestContent] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisibleCards(cards);
     }, 500);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchLatestContent = async () => {
+      const contentRef = ref(database, 'shortlyContent');
+      try {
+        const snapshot = await get(contentRef);
+        if (snapshot.exists()) {
+          const content = Object.values(snapshot.val());
+          const sortedContent = content.sort((a, b) => {
+            const dateTimeA = new Date(a.date + ' ' + a.time);
+            const dateTimeB = new Date(b.date + ' ' + b.time);
+            return dateTimeB - dateTimeA;
+          });
+          setLatestContent(sortedContent.slice(0, 4));
+        } else {
+          console.log("No data available");
+          setLatestContent(ShortlyData.slice(0, 4));
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLatestContent(ShortlyData.slice(0, 4));
+      }
+    };
+
+    fetchLatestContent();
   }, []);
 
   useEffect(() => {
@@ -55,12 +88,6 @@ const IndexPage = () => {
       card.description.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time));
-
-  const sortedData = ShortlyData.sort((a, b) =>
-    new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time)
-  );
-
-  const latestData = sortedData.slice(0, 4);
 
   const handleToggleExpand = (index) => {
     setExpandedItemIndex(expandedItemIndex === index ? null : index);
@@ -214,7 +241,7 @@ const IndexPage = () => {
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#581c87]">Latest Cybersecurity Insights</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {latestData.map((item, index) => (
+              {latestContent.map((item, index) => (
                 <motion.div 
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -224,37 +251,30 @@ const IndexPage = () => {
                   duration-300 transform hover:scale-105"
                 >
                   <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-                  <h3 className="text-xl font-bold mb-2 text-purple-700">{item.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-purple-800">{item.title}</h3>
                   <p className={`text-gray-600 mb-4 ${expandedItemIndex === index ? '' : 'line-clamp-3'}`} 
-                     dangerouslySetInnerHTML={{ __html: item.description.replace(/\*\*(.*?)\*\*/g, '<strong class="text-purple-600">$1</strong>') }}>
+                     dangerouslySetInnerHTML={{ __html: item.description.replace(/\*\*(.*?)\*\*/g, '<strong class="text-purple-800">$1</strong>') }}>
                   </p>
-                  {item.additionalPoints && item.additionalPoints.length > 0 && (
-                    <ul className={`list-disc list-inside text-gray-600 mt-4 ${expandedItemIndex === index ? '' : 'hidden'}`}>
-                      {item.additionalPoints.map((point, i) => (
-                         <li key={i} dangerouslySetInnerHTML={{ __html: point.replace(/\*\*(.*?)\*\*/g, '<strong class="text-purple-600">$1</strong>') }}></li>
-                      ))}
-                    </ul>
-                  )}
                   <button
-                    className="text-purple-600 hover:text-[#581c87] mt-2 block transition-colors duration-300"
+                    className="text-purple-700 hover:text-[#581c87] mt-2 block transition-colors duration-300"
                     onClick={() => handleToggleExpand(index)}
                   >
                     {expandedItemIndex === index ? 'View Less' : 'View More'}
                   </button>
                   <div className="flex justify-between items-center text-gray-400 text-sm mt-4">
                     <div className="flex items-center">
-                      <FaCalendarAlt className="mr-1 text-purple-500" />
+                      <FaCalendarAlt className="mr-1 text-purple-800" />
                       <span>{moment(item.date).format('MMMM D, YYYY')}</span>
                     </div>
                     <div className="flex items-center">
-                      <FaClock className="mr-1 text-purple-500" />
-                      <span>{moment(item.time, 'HH:mm').format('h:mm A')}</span>
+                      <FaClock className="mr-1 text-purple-800" />
+                      <span>{moment(item.time, 'h:mm A').format('h:mm A')}</span>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-            {sortedData.length > 4 && (
+            {latestContent.length > 4 && (
               <div className="mt-12 text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
@@ -263,7 +283,7 @@ const IndexPage = () => {
                 >
                   <Link
                     to="/All-ShortlyContent"
-                    className="relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-purple-600 rounded-full overflow-hidden group"
+                    className="relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-purple-800 rounded-full overflow-hidden group"
                   >
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#581c87] rounded-full group-hover:w-56 group-hover:h-56"></span>
                     <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-purple-700"></span>

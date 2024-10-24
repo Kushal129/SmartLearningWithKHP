@@ -1,5 +1,5 @@
 import linux from '../public/Linux.png';
-import SAvsVAPT from '../src/SAvsVAPT.svg';
+import SAvsVAPT from '../public/SAvsVAPT.svg';
 
 const ShortlyData = [
     {
@@ -145,6 +145,8 @@ const ShortlyData = [
         date: '2024-08-19',
         time: '4:55 PM'
     },
+
+
     {
         title: 'IPv4 vs IPv6',
         image: 'https://www.setakit.com/wp-content/uploads/2022/05/IPV4-vs-IPV6.png',
@@ -237,6 +239,8 @@ const ShortlyData = [
         date: '2024-08-23',
         time: '10:00 AM'
     },
+
+    
     {
         title: 'Firewall Protocols & Its Types',
         image: 'https://static.javatpoint.com/tutorial/firewall/images/types-of-firewall.png',
@@ -370,6 +374,7 @@ const ShortlyData = [
         date: '2024-09-06',
         time: '12:00 PM'
     },
+    // baki
     {
         title: 'Understanding NTLM & Kerberos',
         image: 'https://miro.medium.com/v2/resize:fit:828/format:webp/1*wrdvpUZwnG1slN0bCHqMGg.png',
@@ -427,6 +432,8 @@ const ShortlyData = [
         date: '2024-09-08',
         time: '12:30 PM'
     },
+    // baki
+
     {
         title: 'Packet Crafting in Networking',
         image: 'https://www.valencynetworks.com/images/pktcraft2.png',

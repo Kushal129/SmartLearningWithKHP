@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import { FaUsers, FaEye, FaFileAlt } from 'react-icons/fa';
+import CountUp from 'react-countup';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = ({ darkMode }) => {
   // Fake data for total views, users, and pages
   const totalViews = 15789;
-  const totalUsers = 3254;
-  const totalPages = 42;
+  const totalUsers = 458;
+  const totalPages = 3;
 
   // Fake data for user views graph
   const userViewsData = {
@@ -63,21 +64,27 @@ const Dashboard = ({ darkMode }) => {
           <FaEye className={`text-4xl ${darkMode ? 'text-blue-400' : 'text-blue-500'} mr-4`} />
           <div>
             <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Total Views</h3>
-            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{totalViews.toLocaleString()}</p>
+            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              <CountUp end={totalViews} duration={2.5} separator="," />
+            </p>
           </div>
         </div>
         <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-4 rounded-lg shadow flex items-center`}>
           <FaUsers className={`text-4xl ${darkMode ? 'text-green-400' : 'text-green-500'} mr-4`} />
           <div>
             <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Total Users</h3>
-            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{totalUsers.toLocaleString()}</p>
+            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              <CountUp end={totalUsers} duration={2.5} separator="," />
+            </p>
           </div>
         </div>
         <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-4 rounded-lg shadow flex items-center`}>
           <FaFileAlt className={`text-4xl ${darkMode ? 'text-purple-400' : 'text-purple-500'} mr-4`} />
           <div>
             <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Total Pages</h3>
-            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{totalPages}</p>
+            <p className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              <CountUp end={totalPages} duration={2.5} />
+            </p>
           </div>
         </div>
       </div>

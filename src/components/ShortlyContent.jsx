@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
-import shortlyData from '../Shortlydata';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, get } from "firebase/database";
+import { firebaseConfig } from '../components/Admin/firebase';
+import { getApp, initializeApp } from "firebase/app";
 import { FaSearch, FaCalendarAlt, FaClock } from 'react-icons/fa';
+
+const app = getApp() || initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 const AllShortlyContent = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [viewMode, setViewMode] = useState('grid');
+  const [shortlyData, setShortlyData] = useState([]);
 
-  const sortedData = shortlyData.sort((a, b) =>
-    new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time)
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      const shortlyContentRef = ref(database, 'shortlyContent');
+      try {
+        const snapshot = await get(shortlyContentRef);
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const dataArray = Object.keys(data).map(key => ({
+            id: key,
+            ...data[key]
+          }));
+          setShortlyData(dataArray);
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const sortedData = shortlyData.sort((a, b) => {
+    const dateA = new Date(a.date + ' ' + a.time);
+    const dateB = new Date(b.date + ' ' + b.time);
+    return dateB - dateA;
+  });
 
   const filteredData = sortedData.filter(item =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())

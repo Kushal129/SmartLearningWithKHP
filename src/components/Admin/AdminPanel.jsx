@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RiSunLine, RiMoonLine, RiDashboardLine, RiBookOpenLine, RiLogoutBoxRLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldKeyholeLine, RiMenuFoldLine, RiMenuUnfoldLine, RiCloseLine, RiQuoteText } from 'react-icons/ri';
-import { FaChartBar, FaClipboardList } from 'react-icons/fa';
+import { RiSunLine, RiMoonLine, RiDashboardLine, RiBookOpenLine, RiLogoutBoxRLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldKeyholeLine, RiMenuFoldLine, RiMenuUnfoldLine, RiCloseLine } from 'react-icons/ri';
+import { SiKalilinux } from "react-icons/si";
 import AdminSecurityAnalyst from './Pages/AdminSecurityAnalyst';
 import DashboardContent from './Pages/Dashboard';
 import myimage from '../../../public/my.png';
 import quotes from './Pages/quotes';
 import QuoteModel from './Pages/QuoteModel';
+import AdminKaliLinux from './Pages/AdminKaliLinux';
+import AdminShortlyContent from './Pages/AdminShortlyContent';
 
 const AdminPanel = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -19,7 +21,7 @@ const AdminPanel = () => {
   const [time, setTime] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [currentQuote, setCurrentQuote] = useState('');
-  const [showQuotesModel, setShowQuotesModel] = useState(true);
+  const [showQuotesModel, setShowQuotesModel] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -32,11 +34,15 @@ const AdminPanel = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    setCurrentQuote(randomQuote);
-    setShowQuotesModel(true);
-    const timer = setTimeout(() => setShowQuotesModel(false), 5000);
-    return () => clearTimeout(timer);
+    const hasSeenQuote = localStorage.getItem('hasSeenQuote');
+    if (!hasSeenQuote) {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      setCurrentQuote(randomQuote);
+      setShowQuotesModel(true);
+      localStorage.setItem('hasSeenQuote', 'true');
+      const timer = setTimeout(() => setShowQuotesModel(false), 5000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
@@ -47,6 +53,8 @@ const AdminPanel = () => {
   const pageComponents = {
     dashboard: <DashboardContent darkMode={darkMode} />,
     securityAnalyst: <AdminSecurityAnalyst darkMode={darkMode} />,
+    kaliLinux: <AdminKaliLinux darkMode={darkMode} />,
+    shortlyContent: <AdminShortlyContent darkMode={darkMode} />,
     // Add other page components here
   };
 
@@ -88,8 +96,8 @@ const AdminPanel = () => {
                     className="ml-4 space-y-2"
                   >
                     <SidebarItem icon={RiShieldKeyholeLine} text="Security Analyst" onClick={() => setActivePage('securityAnalyst')} expanded={sidebarOpen} submenuItem />
-                    <SidebarItem icon={FaChartBar} text="Analytics" onClick={() => console.log('Analytics')} expanded={sidebarOpen} submenuItem />
-                    <SidebarItem icon={FaClipboardList} text="Reports" onClick={() => console.log('Reports')} expanded={sidebarOpen} submenuItem />
+                    <SidebarItem icon={SiKalilinux} text="Kali Linux" onClick={() => setActivePage('kaliLinux')} expanded={sidebarOpen} submenuItem />
+                    <SidebarItem icon={RiBookOpenLine} text="Shortly Content" onClick={() => setActivePage('shortlyContent')} expanded={sidebarOpen} submenuItem />
                   </motion.ul>
                 )}
               </AnimatePresence>
@@ -162,12 +170,14 @@ const AdminPanel = () => {
           </AnimatePresence>
         </main>
       </div>
-      <QuoteModel 
-        showQuotesModel={showQuotesModel} 
-        toggleQuotesModel={toggleQuotesModel} 
-        darkMode={darkMode} 
-        currentQuote={currentQuote}
-      />
+      {showQuotesModel && (
+        <QuoteModel 
+          showQuotesModel={showQuotesModel} 
+          toggleQuotesModel={toggleQuotesModel} 
+          darkMode={darkMode} 
+          currentQuote={currentQuote}
+        />
+      )}
     </div>
   );
 };

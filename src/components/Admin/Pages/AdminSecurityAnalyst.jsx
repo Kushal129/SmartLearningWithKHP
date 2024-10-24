@@ -4,9 +4,11 @@ import { getDatabase, ref, push, get, set } from "firebase/database";
 import { toast, Toaster } from 'react-hot-toast';
 import { firebaseConfig } from '../firebase';
 import { getApp, initializeApp } from "firebase/app";
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 
 const app = getApp() || initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const database = getDatabase(app);  
 
 const SecurityAnalystAdmin = ({ darkMode }) => {
   const [formData, setFormData] = useState({
@@ -26,6 +28,8 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
   const [showFirebaseFile, setShowFirebaseFile] = useState(false);
   const [firebaseFileContent, setFirebaseFileContent] = useState('');
   const [showSaveButton, setShowSaveButton] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
     document.body.classList.toggle('dark', darkMode);
@@ -148,30 +152,34 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
   };
 
   const handleSaveChanges = () => {
-    if (window.confirm('Are you sure you want to save the new data?')) {
-      try {
-        const parsedData = JSON.parse(firebaseFileContent);
-        set(ref(database, 'securityAnalyst'), parsedData)
-          .then(() => {
-            toast.success('Changes saved successfully!', {
-              duration: 4000,
-              position: 'bottom-right',
-            });
-            setShowSaveButton(false);
-          })
-          .catch((error) => {
-            toast.error('Error saving changes: ' + error.message, {
-              duration: 4000,
-              position: 'bottom-right',
-            });
+    setAlertMessage('Are you sure you want to save the new data?');
+    setIsAlertOpen(true);
+  };
+
+  const confirmSaveChanges = () => {
+    try {
+      const parsedData = JSON.parse(firebaseFileContent);
+      set(ref(database, 'securityAnalyst'), parsedData)
+        .then(() => {
+          toast.success('Changes saved successfully!', {
+            duration: 4000,
+            position: 'bottom-right',
           });
-      } catch (error) {
-        toast.error('Invalid JSON format. Please check your input.', {
-          duration: 4000,
-          position: 'bottom-right',
+          setShowSaveButton(false);
+        })
+        .catch((error) => {
+          toast.error('Error saving changes: ' + error.message, {
+            duration: 4000,
+            position: 'bottom-right',
+          });
         });
-      }
+    } catch (error) {
+      toast.error('Invalid JSON format. Please check your input.', {
+        duration: 4000,
+        position: 'bottom-right',
+      });
     }
+    setIsAlertOpen(false);
   };
 
   const handleFormatJSON = () => {
@@ -190,6 +198,14 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
         position: 'bottom-right',
       });
     }
+  };
+
+  const handleCopyContent = () => {
+    navigator.clipboard.writeText(firebaseFileContent);
+    toast.success('Content copied to clipboard!', {
+      duration: 2000,
+      position: 'bottom-right',
+    });
   };
 
   return (
@@ -337,7 +353,7 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
             <div className={`flex items-center justify-between px-3 py-2 border-b ${darkMode ? 'border-gray-600' : 'border-gray-300'}`}>
               <div className="flex space-x-2">
                 <button 
-                  onClick={() => navigator.clipboard.writeText(firebaseFileContent)}
+                  onClick={handleCopyContent}
                   className={`px-2 py-1 rounded ${darkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                 >
                   Copy
@@ -385,6 +401,64 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
           )}
         </div>
       )}
+
+      <Transition appear show={isAlertOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={() => setIsAlertOpen(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className={`w-full max-w-md transform overflow-hidden rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 text-left align-middle shadow-xl transition-all`}>
+                  <Dialog.Title as="h3" className={`text-lg font-medium leading-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Confirmation
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
+                      {alertMessage}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex justify-end space-x-3">
+                    <button
+                      type="button"
+                      className={`inline-flex justify-center rounded-md border border-transparent ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-100 hover:bg-blue-200'} px-4 py-2 text-sm font-medium ${darkMode ? 'text-white' : 'text-blue-900'} focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2`}
+                      onClick={confirmSaveChanges}
+                    >
+                      Confirm
+                    </button>
+                    <button
+                      type="button"
+                      className={`inline-flex justify-center rounded-md border border-transparent ${darkMode ? 'bg-gray-600 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'} px-4 py-2 text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-900'} focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2`}
+                      onClick={() => setIsAlertOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   );
 };
