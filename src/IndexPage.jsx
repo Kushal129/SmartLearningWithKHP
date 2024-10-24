@@ -3,7 +3,6 @@ import moment from 'moment';
 import { useSpring, animated, config } from 'react-spring';
 import { Link } from 'react-router-dom';
 import { FaRegWindowClose, FaChevronLeft, FaChevronRight, FaSearch, FaCalendarAlt, FaClock, FaArrowRight } from 'react-icons/fa';
-import ShortlyData from './Shortlydata';
 import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import { useSwipeable } from 'react-swipeable';
@@ -274,34 +273,32 @@ const IndexPage = () => {
                 </motion.div>
               ))}
             </div>
-            {latestContent.length > 4 && (
-              <div className="mt-12 text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+            <div className="mt-12 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Link
+                  to="/All-ShortlyContent"
+                  className="relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-purple-800 rounded-full overflow-hidden group"
                 >
-                  <Link
-                    to="/All-ShortlyContent"
-                    className="relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-purple-800 rounded-full overflow-hidden group"
-                  >
-                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#581c87] rounded-full group-hover:w-56 group-hover:h-56"></span>
-                    <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-purple-700"></span>
-                    <span className="relative flex items-center">
-                      Explore All Content
-                      <motion.span
-                        className="ml-2"
-                        initial={{ x: 0 }}
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <FaArrowRight />
-                      </motion.span>
-                    </span>
-                  </Link>
-                </motion.div>
-              </div>
-            )}
+                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#581c87] rounded-full group-hover:w-56 group-hover:h-56"></span>
+                  <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-purple-700"></span>
+                  <span className="relative flex items-center">
+                    Explore All Content
+                    <motion.span
+                      className="ml-2"
+                      initial={{ x: 0 }}
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <FaArrowRight />
+                    </motion.span>
+                  </span>
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </main>

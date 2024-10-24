@@ -173,7 +173,7 @@ const AdminKaliLinux = ({ darkMode }) => {
   return (
     <div className="max-w-full mx-auto p-6">
       <Toaster position="bottom-center" />
-      <h1 className="text-3xl font-bold mb-6">Kali Linux Content Management</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center">Kali Linux Content Management</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <InputField label="Topic Name" name="topicName" value={formData.topicName} onChange={handleInputChange} darkMode={darkMode} />
         <InputField label="Logo URL" name="logo" value={formData.logo} onChange={handleInputChange} darkMode={darkMode} />
@@ -233,20 +233,23 @@ const AdminKaliLinux = ({ darkMode }) => {
           </div>
         </div>
         
-        <button type="submit" className={`w-full px-4 py-2 rounded ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white transition-colors`}>
-          <FaSave className="inline mr-2" /> Save Content
-        </button>
+        <div className="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
+          <button type="submit" className={`w-full sm:w-auto px-4 py-2 rounded ${darkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'} text-white transition-colors`}>
+            <FaSave className="inline mr-2" /> Save Content
+          </button>
+          <button
+            type="button"
+            onClick={handleShowFirebaseFile}
+            className={`w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${
+              darkMode ? 'text-white bg-gradient-to-r from-red-700 via-orange-500 to-yellow-500 hover:from-red-800 hover:via-orange-600 hover:to-yellow-600' : 'text-white bg-gradient-to-r from-red-500 via-orange-400 to-yellow-400 hover:from-red-600 hover:via-orange-500 hover:to-yellow-500'
+            } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 mt-4 sm:mt-0`}
+          >
+            <FaFileAlt className="mr-2" /> Show Firebase File
+          </button>
+        </div>
       </form>
 
-      <button
-        type="button"
-        onClick={handleShowFirebaseFile}
-        className={`w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${
-          darkMode ? 'text-white bg-green-600 hover:bg-green-700' : 'text-white bg-green-500 hover:bg-green-600'
-        } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-8`}
-      >
-        <FaFileAlt className="mr-2" /> Show Firebase File
-      </button>
+      
 
       {showFirebaseFile && (
         <div className="mt-8">
@@ -295,7 +298,7 @@ const AdminKaliLinux = ({ darkMode }) => {
             <div className="mt-4 flex justify-end">
               <button
                 onClick={handleSaveChanges}
-                className={`px-4 py-2 rounded ${darkMode ? 'bg-green-600 text-white hover:bg-green-700' : 'bg-green-500 text-white hover:bg-green-600'} transition-colors`}
+                className={`px-4 py-2 rounded ${darkMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600'} transition-colors`}
               >
                 Save Changes
               </button>

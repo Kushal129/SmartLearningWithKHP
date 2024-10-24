@@ -209,7 +209,7 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
   };
 
   return (
-    <div className={`max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 ">
       <Toaster />
       <h1 className={`text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}>Security Analyst Content Management</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -338,8 +338,7 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
             type="button"
             onClick={handleShowFirebaseFile}
             className={`w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${darkMode ? 
-            'text-white bg-blue-600 hover:bg-blue-700' : 'text-white bg-blue-600 hover:bg-blue-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
-            transition-colors duration-200`}
+            'text-white bg-gradient-to-r from-red-700 via-orange-500 to-yellow-500 hover:from-red-800 hover:via-orange-600 hover:to-yellow-600' : 'text-white bg-gradient-to-r from-red-500 via-orange-400 to-yellow-400 hover:from-red-600 hover:via-orange-500 hover:to-yellow-500'}`}
           >
             <FaFileAlt className="mr-2" /> Show Firebase File
           </button>
@@ -386,7 +385,7 @@ const SecurityAnalystAdmin = ({ darkMode }) => {
                 setFirebaseFileContent(e.target.value);
                 setShowSaveButton(true);
               }}
-              className={`w-full h-96 px-3 py-2 font-mono text-sm ${darkMode ? 'bg-gray-800 text-gray-200' : 'bg-gray-50 text-gray-900'} focus:outline-none resize-none`}
+              className={`w-full h-96 px-3 py-2 font-mono text-sm ${darkMode ? 'bg-gray-800 text-gray-200' : 'bg-gray-50 text-gray-900'} focus:outline-none resize-none custom-scrollbar`}
             />
           </div>
           {showSaveButton && (

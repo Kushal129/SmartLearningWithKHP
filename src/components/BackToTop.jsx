@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { FaArrowUp } from 'react-icons/fa';
+    import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronUp } from 'react-icons/fa';
 
 const BackToTop = () => {
     const [visible, setVisible] = useState(false);
 
     const toggleVisibility = () => {
-        if (window.pageYOffset > 300) {
-            setVisible(true);
-        } else {
-            setVisible(false);
-        }
+        setVisible(window.pageYOffset > 300);
     };
 
     const scrollToTop = () => {
@@ -21,22 +18,30 @@ const BackToTop = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', toggleVisibility);
-        return () => {
-            window.removeEventListener('scroll', toggleVisibility);
-        };
+        return () => window.removeEventListener('scroll', toggleVisibility);
     }, []);
 
     return (
-        <div className="fixed bottom-4 right-4">
+        <AnimatePresence>
             {visible && (
-                <button
-                    onClick={scrollToTop}
-                    className="bg-purple-500 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-300"
+                <motion.div
+                    className="fixed bottom-4 right-4"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.2 }}
                 >
-                    <FaArrowUp />
-                </button>
+                    <motion.button
+                        onClick={scrollToTop}
+                        className="bg-purple-950 text-white p-2 rounded-full shadow-md hover:bg-purple-900 transition-all duration-200 transform hover:scale-105"
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <FaChevronUp className="text-sm" />
+                    </motion.button>
+                </motion.div>
             )}
-        </div>
+        </AnimatePresence>
     );
 };
 

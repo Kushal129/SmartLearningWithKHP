@@ -132,9 +132,9 @@ const AdminShortlyContent = ({ darkMode }) => {
   };
 
   return (
-    <div className={`container mx-auto p-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+    <div className="container mx-auto p-4 ">
       <Toaster position="bottom-center" />
-      <h1 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Add Shortly Content</h1>
+      <h1 className={`text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>Add Shortly Content</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className={`block mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Title:</label>
@@ -217,20 +217,22 @@ const AdminShortlyContent = ({ darkMode }) => {
             required
           />
         </div>
-        <button type="submit" className={`px-4 py-2 rounded ${darkMode ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'}`}>
-          Add Content
-        </button>
+        <div className="flex flex-col items-center justify-center sm:flex-row sm:space-x-4">
+          <button type="submit" className={`px-4 py-2 rounded ${darkMode ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'} mb-2 sm:mb-0`}>
+            Add Content
+          </button>
+          <button
+            type="button"
+            onClick={handleShowFirebaseFile}
+            className={`w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${
+              darkMode ? 'text-white bg-gradient-to-r from-red-700 via-orange-500 to-yellow-500 hover:from-red-800 hover:via-orange-600 hover:to-yellow-600' : 'text-white bg-gradient-to-r from-red-700 via-orange-500 to-yellow-500 hover:from-red-800 hover:via-orange-600 hover:to-yellow-600'}`}
+          >
+            <FaFileAlt className="mr-2" /> Show Firebase File
+          </button>
+        </div>
       </form>
 
-      <button
-        type="button"
-        onClick={handleShowFirebaseFile}
-        className={`w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${
-          darkMode ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'
-        } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 mt-8`}
-      >
-        <FaFileAlt className="mr-2" /> Show Firebase File
-      </button>
+     
 
       {showFirebaseFile && (
         <div className="mt-8">
@@ -279,7 +281,7 @@ const AdminShortlyContent = ({ darkMode }) => {
             <div className="mt-4 flex justify-end">
               <button
                 onClick={handleSaveChanges}
-                className={`px-4 py-2 rounded ${darkMode ? 'bg-green-700 text-white hover:bg-green-600' : 'bg-green-500 text-white hover:bg-green-600'} transition-colors`}
+                className={`px-4 py-2 rounded ${darkMode ? 'bg-blue-700 text-white hover:bg-blue-600' : 'bg-blue-500 text-white hover:bg-blue-600'} transition-colors`}
               >
                 Save Changes
               </button>

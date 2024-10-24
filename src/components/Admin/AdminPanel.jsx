@@ -1,20 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './Auth/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RiSunLine, RiMoonLine, RiDashboardLine, RiBookOpenLine, RiLogoutBoxRLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldKeyholeLine, RiMenuFoldLine, RiMenuUnfoldLine, RiCloseLine } from 'react-icons/ri';
+import { RiSunLine, RiMoonLine, RiDashboardLine, RiBookOpenLine, RiLogoutBoxRLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldKeyholeLine, RiMenuFoldLine, RiMenuUnfoldLine, RiCloseLine, RiQuoteText } from 'react-icons/ri';
 import { SiKalilinux } from "react-icons/si";
 import AdminSecurityAnalyst from './Pages/AdminSecurityAnalyst';
 import DashboardContent from './Pages/Dashboard';
 import myimage from '../../../public/my.png';
+import "./AdminPanel.css"
 import quotes from './Pages/quotes';
 import QuoteModel from './Pages/QuoteModel';
 import AdminKaliLinux from './Pages/AdminKaliLinux';
 import AdminShortlyContent from './Pages/AdminShortlyContent';
+import { toast } from 'react-hot-toast';
 
 const AdminPanel = () => {
+  const { logout, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
   });
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+    toast.success('Logged out successfully!', { position: 'top-center' });
+  };
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [pagesExpanded, setPagesExpanded] = useState(false);
   const [activePage, setActivePage] = useState('dashboard');
@@ -34,16 +45,15 @@ const AdminPanel = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    const hasSeenQuote = localStorage.getItem('hasSeenQuote');
-    if (!hasSeenQuote) {
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      setCurrentQuote(randomQuote);
-      setShowQuotesModel(true);
-      localStorage.setItem('hasSeenQuote', 'true');
-      const timer = setTimeout(() => setShowQuotesModel(false), 5000);
-      return () => clearTimeout(timer);
-    }
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    setCurrentQuote(randomQuote);
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setShowQuotesModel(true);
+    }
+  }, [isAuthenticated]);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -85,8 +95,16 @@ const AdminPanel = () => {
         <hr className="border-spacing-0.5 border-white my-2" />
         <nav className="flex-1 overflow-y-auto">
           <ul className="space-y-2 p-2">
-            <SidebarItem icon={RiDashboardLine} text="Dashboard" onClick={() => setActivePage('dashboard')} expanded={sidebarOpen} />
-            <SidebarItem icon={RiBookOpenLine} text="Pages" onClick={togglePages} expanded={sidebarOpen} hasSubmenu>
+            <SidebarItem icon={RiDashboardLine} text="Dashboard" onClick={() => setActivePage('dashboard')} expanded={sidebarOpen} active={activePage === 'dashboard'} />
+            <SidebarItem 
+              icon={RiBookOpenLine} 
+              text="Pages" 
+              onClick={togglePages} 
+              expanded={sidebarOpen} 
+              hasSubmenu 
+              active={pagesExpanded}
+              expandIcon={pagesExpanded ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+            >
               <AnimatePresence>
                 {pagesExpanded && (
                   <motion.ul
@@ -95,18 +113,17 @@ const AdminPanel = () => {
                     exit={{ opacity: 0, height: 0 }}
                     className="ml-4 space-y-2"
                   >
-                    <SidebarItem icon={RiShieldKeyholeLine} text="Security Analyst" onClick={() => setActivePage('securityAnalyst')} expanded={sidebarOpen} submenuItem />
-                    <SidebarItem icon={SiKalilinux} text="Kali Linux" onClick={() => setActivePage('kaliLinux')} expanded={sidebarOpen} submenuItem />
-                    <SidebarItem icon={RiBookOpenLine} text="Shortly Content" onClick={() => setActivePage('shortlyContent')} expanded={sidebarOpen} submenuItem />
+                    <SidebarItem icon={RiShieldKeyholeLine} text="Security Analyst" onClick={() => setActivePage('securityAnalyst')} expanded={sidebarOpen} submenuItem active={activePage === 'securityAnalyst'} />
+                    <SidebarItem icon={SiKalilinux} text="Kali Linux" onClick={() => setActivePage('kaliLinux')} expanded={sidebarOpen} submenuItem active={activePage === 'kaliLinux'} />
+                    <SidebarItem icon={RiBookOpenLine} text="Shortly Content" onClick={() => setActivePage('shortlyContent')} expanded={sidebarOpen} submenuItem active={activePage === 'shortlyContent'} />
                   </motion.ul>
                 )}
               </AnimatePresence>
             </SidebarItem>
-            {/* <SidebarItem icon={RiQuoteText} text="Quotes" onClick={toggleQuotesModel} expanded={sidebarOpen} /> */}
           </ul>
         </nav>
         <div className="p-4">
-          <SidebarItem icon={RiLogoutBoxRLine} text="Logout" onClick={() => console.log('Logout')} expanded={sidebarOpen} />
+          <SidebarItem icon={RiLogoutBoxRLine} text="Logout" onClick={handleLogout} expanded={sidebarOpen} />
         </div>
       </motion.div>
 
@@ -128,7 +145,7 @@ const AdminPanel = () => {
               <div className="relative">
                 <img 
                   src={myimage} 
-                  alt="User" 
+                  alt="Admin" 
                   className="w-10 h-10 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity duration-200" 
                   onClick={() => setShowModal(true)}
                 />
@@ -156,7 +173,7 @@ const AdminPanel = () => {
             </div>
           </div>
         </header>
-        <main className={`flex-1 overflow-x-hidden overflow-y-auto p-6 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
+        <main className={`flex-1 overflow-x-hidden overflow-y-auto p-6 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} custom-scrollbar`}>
           <AnimatePresence mode="wait">
             <motion.div
               key={activePage}
@@ -182,7 +199,7 @@ const AdminPanel = () => {
   );
 };
 
-const SidebarItem = ({ icon: Icon, text, onClick, expanded, hasSubmenu, submenuItem, children }) => {
+const SidebarItem = ({ icon: Icon, text, onClick, expanded, hasSubmenu, submenuItem, children, expandIcon }) => {
   return (
     <>
       <button
@@ -195,7 +212,7 @@ const SidebarItem = ({ icon: Icon, text, onClick, expanded, hasSubmenu, submenuI
         {expanded && (
           <>
             <span className="flex-1 text-left">{text}</span>
-            {hasSubmenu && (children ? <RiArrowUpSLine /> : <RiArrowDownSLine />)}
+            {hasSubmenu && expandIcon}
           </>
         )}
       </button>
